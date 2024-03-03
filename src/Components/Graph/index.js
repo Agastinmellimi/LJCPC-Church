@@ -114,8 +114,8 @@ export const Graph = () => {
                     
                     <Tooltip trigger='hover' cursor={{fill: 'transparent'}}  contentStyle={{fontWeight: 'bold', fontFamily: "Mandali", backgroundColor: "rgba(193, 221, 139, 0.81)", backdropFilter: 'blur(3px)', color: "#fff", borderRadius: '6px'}}/>
                     <Legend />
-                    <XAxis type='category' dataKey='name' tick={barHide === true ? {fill: "#fff"} : false} stroke="#f5d86e"   interval={0} style={{fontSize: 10, fontFamily: "Mandali"}}/>
-                    <Bar dataKey="presents" label={{dataKey:'name', position: 'insideUp', angle: '-90', stroke: "#f5d86e", fontSize: '12px', letterSpacing: '0.20em'}} fill="#097569" maxBarSize={45}   style={{cursor: "pointer", fontSize: 8}} />
+                    <XAxis type='category' dataKey='name' tick={barHide === true ? {fill: "#fff"} : false} stroke="#f5d86e"   interval={0} style={{fontSize: 10, fontFamily: "Mandali, sans-serif", fontStyle: 'italic'}}/>
+                    <Bar dataKey="presents" label={{dataKey:'name', position: 'insideUp', angle: '-90', stroke: "#f5d86e", fontSize: '12px', letterSpacing: '0.20em'}} fill="#097569" maxBarSize={45}   style={{cursor: "pointer", fontSize: 8, fontFamily: "Mandali, sans-serif"}} />
                 </BarChart>
         </ResponsiveContainer>
         
