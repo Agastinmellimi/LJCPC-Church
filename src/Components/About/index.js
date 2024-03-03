@@ -44,9 +44,9 @@ const About = () => {
         </BackBtnContainer>
         <AboutDetailsContainer>
         {loader ? (
-                   <Skeleton.SkeletonThemeProvider highlight="dark" animationDuration={1} color="#e1e2e3" dataTestId="loader" style={{marginBottom: 50}}>
+                   <Skeleton.SkeletonThemeProvider highlight="dark" animationDuration={1} color="rgba(219, 219, 219, 0.27000001072883606)" dataTestId="loader" style={{marginBottom: 50}}>
                       <Skeleton style={{width: '100%', maxWidth: '240px', margin: 'auto', height: '220px', borderRadius: '50%', marginTop: 20}}/>
-                      <Skeleton count={3} widthMultiple={['70%', '50%', '40%']} heightMultiple={['20px', '15px', '15px']} style={{ margin: 'auto',  borderRadius: '20px', marginTop: 10}}/>
+                      <Skeleton count={3} widthMultiple={['70%', '60%', '50%']} heightMultiple={['20px', '17px', '17px']} style={{ margin: 'auto',  borderRadius: '15px', marginTop: 10}}/>
                     </Skeleton.SkeletonThemeProvider>
         ) : (
           <>

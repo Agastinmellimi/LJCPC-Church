@@ -49,7 +49,7 @@ export const ChildrenStatus = styled.li`
      border-radius: 8px;
      margin-bottom: 20px;
      
-     backdrop-filter: blur(7px);
+     backdrop-filter: blur(2px);
      background: rgba(219, 219, 219, 0.27000001072883606);
      width: 100%;
      border: ${props => props.count > 0 ? 'none': "2px solid #f7a1a7"};
@@ -348,7 +348,7 @@ export const DailyStatusChildern = styled.li`
      @media (min-width: 900px ) {
         width: 48%;
      }
-     backdrop-filter: blur(10px);
+     backdrop-filter: blur(2px);
      @media (max-width: 400px) {
         flex-direction: column;
         align-items: stretch;
