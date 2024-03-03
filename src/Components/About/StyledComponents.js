@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const AboutContainer = styled.div`
-     background-image: url("https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709182956/ykfft7pxx68otm6dlgxn.jpg");
+     background-image: url("https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709435290/zq6evcwuplfmkramgmps.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
