@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import {Routes, Route} from 'react-router-dom'
+import ViewAttendance from './Components/ViewAttendance';
+import Home from './Components/Home';
+import Graph from './Components/Graph';
+import About from './Components/About';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import './index.css';
+
+const App = () => (
+  
+    <Routes>
+      <Route exact path="/" element={<Home/>} />
+      <Route exact path="/about" element={<About/>} />
+      <Route exact path='/children-progress' element={<Graph/>}/>
+      <Route exact path="/attendance-details" element={<ViewAttendance/>} />
+    </Routes>
+ 
+)
 
 export default App;

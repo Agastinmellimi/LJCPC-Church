@@ -1,13 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=Koulen&family=Miltonian+Tattoo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=Koulen&family=Mandali&family=Miltonian+Tattoo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=DM+Sans:opsz,wght@9..40,500&family=Koulen&family=Mandali&family=Miltonian+Tattoo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=DM+Sans:opsz,wght@9..40,500&family=Josefin+Sans&family=Koulen&family=Mandali&family=Miltonian+Tattoo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=DM+Sans:opsz,wght@9..40,500&family=Josefin+Sans&family=Koulen&family=Mandali&family=Miltonian+Tattoo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=DM+Sans:opsz,wght@9..40,500&family=Josefin+Sans&family=Koulen&family=Mako&family=Mandali&family=Marmelad&family=Miltonian+Tattoo&display=swap');
+*{
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
+  
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important; 
+  -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important; 
+  outline: none !important;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(219, 219, 219, 0.27000001072883606);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.tool{
+  background-color: #5bc971 !important;
+  color: #fff !important;
+  font-family: "Mandali", sans-serif !important;
+  font-weight: 600 !important;
+  line-height: 20px !important;
+}
+h1{
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+p{
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+button{
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.icon{
+  animation: slide 1s ease-in-out infinite alternate;
+  font-size: 25px;
+}
+@keyframes slide {
+    to {
+          transform: translateX(-2px);
+          
+    } from {
+          transform: translateX(5px);
+      
+    }
 }
