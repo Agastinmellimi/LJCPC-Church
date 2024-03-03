@@ -76,10 +76,10 @@ button{
 }
 @keyframes slide {
     to {
-          transform: translateX(-2px);
+          transform: translateX(-7px);
           
     } from {
-          transform: translateX(5px);
-      
+          transform: translateX(2px);
+          
     }
 }
