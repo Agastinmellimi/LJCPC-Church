@@ -81,11 +81,11 @@ export const TabsContentContainer = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: stretch;
-      flex-wrap: wrap;
       width: 90%;
       height: 170px;
       @media (max-width: 300px) {
            flex-direction: column;
+           align-items: center;
       }
       
 `
@@ -151,6 +151,9 @@ export const AboutTab = styled.div`
            &:hover {
                 transform: translateX(-7px);
             }
+      }
+      @media (max-width: 235px) {
+           margin-top: 14px;
       }
       
 `

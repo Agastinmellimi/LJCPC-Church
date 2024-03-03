@@ -40,13 +40,13 @@ const Home = () => {
             <TabsContainer>
                 <Tab onClick={() => navigate('/attendance-details')}>
                   <TabNameContainer>
-                      <TabName>Attendance</TabName>
+                      <TabName>Children Attendance</TabName>
                       <TbMickey size={20} data-aos='slide-right' data-aos-easing="linear" color='#232324'/>
                   </TabNameContainer>
                   </Tab>
                 <Tab graph='true' onClick={() => navigate('/children-progress')}>
                 <TabNameContainer >
-                      <TabName>Progress</TabName>
+                      <TabName>Children Progress</TabName>
                       <VscGraph size={20} data-aos='slide-right' data-aos-easing="linear" color='#232324'/>
                   </TabNameContainer>
                 </Tab>
