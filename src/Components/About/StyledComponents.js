@@ -66,16 +66,16 @@ export const AboutText = styled.p`
 `
 export const DetailsImage = styled.img`
     width: 100%;
-    max-width: 270px;
+    max-width: 240px;
     order: 1;
     margin: auto;
     background-color: #F4D03F;
-background-image: linear-gradient(132deg, #F4D03F 0%, #16A085 100%);
+    background-image: linear-gradient(132deg, #F4D03F 0%, #16A085 100%);
 
     border-radius: 50%;
     margin-top: 50px;
     @media (max-width: 370px) {
-       max-width: 200px;
+       max-width: 170px;
     }
     animation: mode 5s ease-in-out infinite alternate;
     @keyframes mode {

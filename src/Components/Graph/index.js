@@ -30,7 +30,9 @@ import {
     BtnContainer,
     BackBtn,
     BackBtnContainer,
-    HomeImage
+    HomeImage,
+    SelectInput,
+    Option
 } from './StyledComponents'
 
 const apiStatus = {
@@ -56,7 +58,37 @@ export const Graph = () => {
   
     const [barHide, handleBar] =  useState(false)
     const [WindowWidth, setWidth] = useState(window.innerWidth)
+    const [language, setLanguage] = useState('english')
     const navigate = useNavigate()
+
+    const getTeluguWords = (name) => {
+        switch (name) {
+             case 'ADYA MADHABATHULA':
+                 return 'ఆద్య'
+             case "MOJESH CHELLE":
+                 return 'మోజేష్'
+             case "HANI MADHABATHULA":
+                 return 'హాని'
+             case "HARSHA VARDHAN":
+                 return 'హర్ష'
+             case "JOSHNA CHELLE":
+                 return 'జోష్నా'
+             case "PRAVEEN KUMAR PALLI":
+                 return 'ప్రవీణ్'
+             case "RAVISAGAR NEPA":
+                 return 'రవిసాగర్'
+             case "UDAY KRISHNA KURMA":
+                 return 'ఉదయ్'
+             case "RISHI CHELLE":
+                 return 'రిషి'
+             case "SANTHOSH DHANAM":
+                 return 'సంతోష్'
+             case "SRINIVAS KURMA":
+                 return 'శ్రీనివాస్'
+             default:
+                 return name
+        }
+    }
 
     useEffect(() => {
         window.addEventListener('resize', () => {
@@ -91,20 +123,56 @@ export const Graph = () => {
     const renderStatusFailureView = () => (
         <FailureContainer>
             <FailureImage alt='failure-view' src={apiResponseData.failureImage}/>
-            <ErrorMessage>{apiResponseData.errMsg}</ErrorMessage>
+            <ErrorMessage>
+                {apiResponseData.errMsg === 'Sorry!, search year cannot exist' ? 
+                (language === 'english' ? 'Sorry!, search year cannot exist' : 'క్షమించండి!, శోధన సంవత్సరం ఉనికిలో లేదు') 
+                : 'క్షమించండి!, శోధన నెల ఉనికిలో లేదు'}
+            </ErrorMessage>
             <BtnContainer>
-            <TryAgainBtn type='button' onClick={statusRefresh}>Try again</TryAgainBtn>
+            <TryAgainBtn type='button' onClick={statusRefresh}>{language === 'english' ? "Try again" : 'మళ్ళీ ప్రయత్నించండి'}</TryAgainBtn>
             <TryAgainBtn refresh={'true'} type='button' onClick={refresh}>Refersh</TryAgainBtn>
             </BtnContainer>
         </FailureContainer>
     )
+
+    const getTeluguMonthName = () => {
+        const {month} = apiResponseData
+        switch (parseInt(month)) {
+            case 1: 
+                return "జనవరి"
+            case 2: 
+               return "ఫిబ్రవరి"
+            case 3:
+                return "మార్చి"
+            case 4:
+                return "ఏప్రిల్"
+            case 5:
+                return "మే"
+            case 6:
+                return "జూన్"
+            case 7:
+                return "జూలై"
+            case 8:
+                return "అగష్టు"
+            case 9:
+                return "సెప్టెంబర్"
+            case 10:
+                return "అక్టోబర్"
+            case 11:
+                return "నవంబర్"
+            case 12:
+                return "డిసెంబర్"
+            default:
+                return ''
+        }
+    }
     
 
     const renderSuccessView = () => (
         <>
-        <MonthName>{apiResponseData.monthName} {apiResponseData.yearText}th Report</MonthName>
+        <MonthName>{language === 'english' ? apiResponseData.monthName : getTeluguMonthName(apiResponseData.month)} {language === 'english' ? `${apiResponseData.yearText}th`:`${apiResponseData.yearText}వ`} Report</MonthName>
         <ResponsiveContainer width="90%" height='65%' style={{alignSelf: 'center', flexShrink: 0, marginTop: 20}}>
-                <BarChart  data={apiResponseData.childrenStatusArray.map(item => ({...item, name: item.name.split(" ")[0]}))} height={300} margin={{
+                <BarChart  data={apiResponseData.childrenStatusArray.map(item => ({...item, name: language === 'english' ? item.name.split(' ')[0] : getTeluguWords(item.name)}))} height={300} margin={{
                 top: 20,
                 right: 30,
                 left: 20,
@@ -112,10 +180,10 @@ export const Graph = () => {
                 
             }}>
                     
-                    <Tooltip trigger='hover' cursor={{fill: 'transparent'}}  contentStyle={{fontWeight: 'bold', fontFamily: "Mandali", backgroundColor: "rgba(193, 221, 139, 0.81)", backdropFilter: 'blur(3px)', color: "#fff", borderRadius: '6px'}}/>
+                    <Tooltip trigger='hover' cursor={{fill: 'transparent'}}  contentStyle={{fontWeight: 'bold', fontFamily: "Mandali", backgroundColor: "rgba(193, 221, 139, 0.81)", backdropFilter: 'blur(3px)', color: "#fff", borderRadius: '6px', fontSize: 20, lineHeight: '25px'}}/>
                     <Legend />
-                    <XAxis type='category' dataKey='name' tick={barHide === true ? {fill: "#fff"} : false} stroke="#f5d86e"   interval={0} style={{fontSize: 10, fontFamily: "Mandali, sans-serif", fontStyle: 'italic'}}/>
-                    <Bar dataKey="presents" label={barHide === false && {dataKey:'name', position: 'insideUp', angle: '-90', stroke: "#f5d86e", fontSize: '12px', letterSpacing: '0.20em'}} fill="#097569" maxBarSize={45}   style={{cursor: "pointer", fontSize: 8, fontFamily: "Mandali, sans-serif"}} />
+                    <XAxis type='category' dataKey='name' tick={barHide === true ? {fill: "#fff"} : false} stroke="#f5d86e"   interval={0} style={{fontSize: language === 'english' ? 10 : 15, fontFamily: "Mandali, sans-serif", fontStyle: 'italic'}}/>
+                    <Bar dataKey="presents" label={barHide === false && {dataKey:'name', position: 'insideUp', angle: '-90', stroke: "#f5d86e", fontSize: language === 'english' ? '12px' : '13px', letterSpacing: '0.20em'}} fill="#097569" maxBarSize={45}   style={{cursor: "pointer", fontSize: 8, fontFamily: "Mandali, sans-serif"}} />
                 </BarChart>
         </ResponsiveContainer>
         
@@ -128,6 +196,8 @@ export const Graph = () => {
                 <BarLoader color={"#fff"} size={170}  data-testid="loader"/>
            </LoaderContainer>
     )
+
+    
 
     const renderCorrespondingView = () => {
         const {childrenStatus} = apiResponseData
@@ -287,25 +357,36 @@ export const Graph = () => {
         }
     }
 
+    const changeLanguage = (event) => {
+        setLanguage(event.target.value)
+      }
+
 
     return (
         <GraphContainer>
         <BackBtnContainer>
-            <IoIosArrowBack color='#fff' className="icon" />
+            <IoIosArrowBack color='#fff'  className="icon"/>
             <BackBtn type='button' onClick={() => navigate('/')}>
                 <HomeImage alt='home' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709379149/tjrzexavkxpfacg5atjf.gif'/>
-                    
+                  
                 </BackBtn>
+                <SelectInput defaultValue={language} onChange={changeLanguage}>
+                    <Option  value='english'>English</Option>
+                    <Option style={{letterSpacing: '0.7em'}}  value='తెలుగు'>తెలుగు</Option>
+                </SelectInput>
         </BackBtnContainer>
         <Heading>Children Status Graphical view</Heading>
-        <Note>*please fill in the required input fields only numbers, do not fill in any characters or symbols.</Note>
+            <Note style={{fontSize: language === 'తెలుగు' && '15px'}}>
+                    *{language === 'english' ? 'please fill in the required input fields only numbers, do not fill in any characters or symbols.'
+                : 'దయచేసి అవసరమైన ఇన్‌పుట్ ఫీల్డ్‌లలో సంఖ్యలను మాత్రమే పూరించండి, ఏ అక్షరాలు లేదా చిహ్నాలను పూరించవద్దు.'}
+            </Note>
         <SearchContainer onSubmit={submitForm}>
             <InputFeild>
-                {apiResponseData.monthErr && <InputError>Please fill month input feild</InputError>}
+                {apiResponseData.monthErr && <InputError style={{fontSize: language === 'తెలుగు' && '14px'}}>{language === 'english' ? 'Please fill month input feild' : 'దయచేసి నెల ఇన్‌పుట్‌ని పూరించండి'}</InputError>}
                 <MonthInput err={apiResponseData.monthErr.toString()} type='text' value={apiResponseData.month} onChange={onChangeMonth} placeholder='MM'/>   
             </InputFeild>
             <InputFeild>
-                {apiResponseData.yearErr && <InputError>Please fill year input feild</InputError>}
+                {apiResponseData.yearErr && <InputError style={{fontSize: language === 'తెలుగు' && '14px'}}>{language === 'english' ? 'Please fill year input feild' : 'దయచేసి సంవత్సరం ఇన్‌పుట్‌ని పూరించండి'}</InputError>}
                 <YearInput err={apiResponseData.yearErr.toString()} type='text' value={apiResponseData.year} onChange={onChangeYear} placeholder='YYYY'/>
             </InputFeild>
             <SearchBtn icon={(barHide === false).toString()} type='submit'>{barHide ? 'Search' : <IoSearch size={30} color='#fff'/>}</SearchBtn>

@@ -265,21 +265,29 @@ const ViewAttendance = () => {
 
     const refershDates = () => {
         getDistinctDates()
+        setApiResponseData(prev => ({
+            ...prev,
+            datesViseApiStatus: apiStatus.initial,
+            dateApiLoading: false,
+            dateError: false,
+        }))
+        handleSearch(false)
+        setSearchDate('')
     }
 
     const renderStatusFailureView = () => (
         <FailureContainer>
             <FailureImage alt='failure-view' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709099344/ocxgxmjr1xhk24uitho6.png'/>
-            <ErrorMessage>We cannot seem to find the page you are looking for.</ErrorMessage>
-            <TryAgainBtn type='button' onClick={statusRefresh}>Try again</TryAgainBtn>
+            <ErrorMessage>{language === 'english' ? 'We cannot seem to find the page you are looking for.' : 'మీరు వెతుకుతున్న సమాచారాన్ని మేము కనుగొనలేకపోయాము.'}</ErrorMessage>
+            <TryAgainBtn type='button' onClick={statusRefresh}>{language === 'english' ? "Try again" : 'మళ్ళీ ప్రయత్నించండి'}</TryAgainBtn>
         </FailureContainer>
     )
 
     const renderDateFailureView = () => (
         <FailureContainer>
             <FailureImage alt='failure-view' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709099344/ocxgxmjr1xhk24uitho6.png'/>
-            <ErrorMessage>We cannot seem to find the page you are looking for.</ErrorMessage>
-            <TryAgainBtn type='button' onClick={refershDates}>Try again</TryAgainBtn>
+            <ErrorMessage>{language === 'english' ? 'We cannot seem to find the page you are looking for.' : 'మీరు వెతుకుతున్న సమాచారాన్ని మేము కనుగొనలేకపోయాము.'}</ErrorMessage>
+            <TryAgainBtn type='button' onClick={refershDates}>{language === 'english' ? "Try again" : 'మళ్ళీ ప్రయత్నించండి'}</TryAgainBtn>
         </FailureContainer>
     )
 
@@ -423,7 +431,7 @@ const ViewAttendance = () => {
                     <Option style={{letterSpacing: '0.7em'}}  value='తెలుగు'>తెలుగు</Option>
                 </SelectInput>
         </BackBtnContainer>
-        <Heading><HighlatedText>Children</HighlatedText> Attendance Details</Heading>
+        <Heading><HighlatedText>{language === 'english' ? 'Children': 'పిల్లల'}</HighlatedText> {language === 'english' ? 'Attendance details': 'హాజరు వివరాలు'}</Heading>
         
         <Skeleton.SkeletonThemeProvider highlight="light" animationDuration={1} color="#919190" style={{alignSelf: 'center', display: 'flex', flexDirection: 'column', width: '100%'}}>
           {renderAttendanceDetailsView()}
@@ -431,7 +439,7 @@ const ViewAttendance = () => {
         {apiResponseData.dateError ? renderDateFailureView() : (
             <>
             <SelectDateContainer>
-                <SelctDateHead>Attendance details by Dates</SelctDateHead>
+                <SelctDateHead>{language === 'english' ? 'Attendance details by Dates': 'తేదీల వారీగా హాజరు వివరాలు'}</SelctDateHead>
                 <SearchDataContainer>
                     <SearchDateInput type='date' value={searchDate} placeholder='YYYY/MM/DD' onChange={changeDate}/>
                     <ReactTooltip id='searchDate' place='bottom' anchorSelect="#not-clickable" className='tool'/>
@@ -443,7 +451,7 @@ const ViewAttendance = () => {
                 searchErr ? (
                     <DateContainer>
                         <DateImage alt='select date' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1707990706/k3yuvyjhdhdr0kqirv7j.png'/>
-                        <SelectDateText>Your search date cannot in backend</SelectDateText>
+                        <SelectDateText>{language === 'english' ? 'Your search date cannot in backend': 'మీ శోధన తేదీ ఉనికిలో లేదు'}</SelectDateText>
                     </DateContainer>
                 ) : (
                     <Skeleton.SkeletonThemeProvider highlight="light" animationDuration={1} color="#919190" style={{alignSelf: 'center', display: 'flex', flexDirection: 'column', width: '100%'}}>
@@ -453,7 +461,7 @@ const ViewAttendance = () => {
             ) : (
                 <DateContainer>
                         <DateImage alt='select date' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709103464/bxm9dnwyw5h0qmkk2llb.png'/>
-                        <SelectDateText>Search date and get your details</SelectDateText>
+                        <SelectDateText>{language === 'english' ? 'Search by date and get your details' : 'తేదీ ద్వారా శోధించండి మరియు వివరాలను పొందండి'}</SelectDateText>
                 </DateContainer>
             )}
            

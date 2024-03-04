@@ -282,19 +282,10 @@ export const SelectInput = styled.select`
            line-height: 15px;
            padding: 2px 5px 2px 5px;
      }
+     transition: all 0.4s ease-in-out;
+     
 `
-export const SelectDateInputContainer = styled.div`
-      display: flex;
-      align-items: center;
-      margin-top: 20px;
-`
-export const DateLabel = styled.label`
-       font-family: Mandali;
-       font-size: 18px;
-       margin-right: 10px;
-       line-height: 20px;
-       color: #fff;
-`
+
 export const Option = styled.option`
    font-family: "Mandali", sans-serif;
    cursor: pointer;
