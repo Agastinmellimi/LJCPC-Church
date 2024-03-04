@@ -73,6 +73,8 @@ const ViewAttendance = () => {
     const [currentPage, setCurrentPage] = useState(1)
 
     const [language, setLanguage] = useState('english')
+
+    const [WindowWidth, setWidth] = useState(window.innerWidth)
   
 
     const [page, setPage] = useState(1)
@@ -112,6 +114,12 @@ const ViewAttendance = () => {
         }
        
     }
+
+    useEffect(() => {
+        window.addEventListener('resize', () => {
+            setWidth(window.innerWidth);
+          });
+    }, [WindowWidth])
 
     const skeletonView = () => (
         
@@ -292,11 +300,16 @@ const ViewAttendance = () => {
     )
 
     const handlePrevPage = () => {
-        getAllChildrenAttendanceDetails()
+        if (WindowWidth >= 700) {
+            getAllChildrenAttendanceDetails()
+        } 
+        
         setCurrentPage(prevPage => prevPage - 1);
     }
     const handleNextPage = () => {
-        getAllChildrenAttendanceDetails()
+        if (WindowWidth >= 700) {
+            getAllChildrenAttendanceDetails()
+        } 
         setCurrentPage(prevPage => prevPage + 1);
     }
 
