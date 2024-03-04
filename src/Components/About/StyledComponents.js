@@ -224,3 +224,34 @@ export const HomeImage = styled.img`
      margin-right: 3px;
      border-radius: 50%;
 `
+export const SelectInput = styled.select`
+     outline: none;
+     color: #000;
+     font-size: 15px;
+     font-family: 'Mandali', sans-serif;
+     line-height: 18px;
+     margin-left: auto;
+     letter-spacing: 0.03em;
+     cursor: pointer;
+     font-weight: 600;
+     background-color: rgba(219, 219, 219, 0.27000001072883606);
+     padding: 2px 8px 2px 8px;
+     border: 1px solid #fff;
+     color: #fff;
+     border-radius: 7px;
+     @media (max-width: 500px) {
+           font-size: 12px;
+           line-height: 15px;
+           padding: 2px 5px 2px 5px;
+     }
+     transition: all 0.4s ease-in-out;
+     
+`
+
+export const Option = styled.option`
+   font-family: "Mandali", sans-serif;
+   cursor: pointer;
+   color: #000;
+   font-size: 18px;
+   line-height: 20px;
+`

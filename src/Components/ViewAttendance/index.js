@@ -310,7 +310,7 @@ const ViewAttendance = () => {
                     <ChildrenStatus key={item.name} count={item.presents}>
                         <FirstLetterContainer count={item.presents}>{item.name[0].toUpperCase()}</FirstLetterContainer>
                         <ChildrenName style={{ fontSize: language === 'తెలుగు' && `20px`}}>{language === 'english' ? item.name : getTeluguWords(item.name)}</ChildrenName>
-                        <Presents>presents: <AttendanceCount count={item.presents}>{item.presents}</AttendanceCount></Presents>
+                        <Presents>{language === 'english' ? 'Present' : 'హాజరు'}: <AttendanceCount count={item.presents}>{item.presents}</AttendanceCount></Presents>
                     </ChildrenStatus>
                 ))}
             </ViewChildrenContainer>
