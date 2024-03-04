@@ -38,7 +38,9 @@ import {
     PrevButton,
     BackBtn,
     BackBtnContainer,
-    HomeImage
+    HomeImage,
+    SelectInput,
+    Option
 } from './StyledComponents'
 
 const apiStatus = {
@@ -69,6 +71,8 @@ const ViewAttendance = () => {
     const [isSearch, handleSearch] = useState(false)
 
     const [currentPage, setCurrentPage] = useState(1)
+
+    const [language, setLanguage] = useState('english')
   
 
     const [page, setPage] = useState(1)
@@ -226,7 +230,34 @@ const ViewAttendance = () => {
             getAllChildrenAttendanceDetails()
     }, [])
 
-   
+   const getTeluguWords = (name) => {
+       switch (name) {
+            case 'ADYA MADHABATHULA':
+                return 'ఆద్య మధబత్తుల'
+            case "MOJESH CHELLE":
+                return 'మోజేష్ చెల్లె'
+            case "HANI MADHABATHULA":
+                return 'హాని మాధబత్తుల'
+            case "HARSHA VARDHAN":
+                return 'హర్ష వర్ధన్ చెల్లె'
+            case "JOSHNA CHELLE":
+                return 'జోష్నా చెల్లె'
+            case "PRAVEEN KUMAR PALLI":
+                return 'ప్రవీణ్ కుమార్ పల్లి'
+            case "RAVISAGAR NEPA":
+                return 'రవిసాగర్ నేపా'
+            case "UDAY KRISHNA KURMA":
+                return 'ఉదయ్ కృష్ణ కూర్మ'
+            case "RISHI CHELLE":
+                return 'రిషి చెల్లె'
+            case "SANTHOSH DHANAM":
+                return 'సంతోష్ దానం'
+            case "SRINIVAS KURMA":
+                return 'శ్రీనివాస్ కూర్మ'
+            default:
+                return name
+       }
+   }
 
     const statusRefresh = () => {
         getAllChildrenAttendanceDetails()
@@ -263,15 +294,14 @@ const ViewAttendance = () => {
 
     const startIndex = (currentPage - 1) * 6;
     const endIndex = startIndex + 6;
-
-
+    console.log(language)
     const renderSuccessChildrensStatusView = () => (
            <>
             <ViewChildrenContainer>
                 {apiResponseData.childrenStatusArray.slice(startIndex, endIndex).map(item => (
                     <ChildrenStatus key={item.name} count={item.presents}>
                         <FirstLetterContainer count={item.presents}>{item.name[0].toUpperCase()}</FirstLetterContainer>
-                        <ChildrenName>{item.name}</ChildrenName>
+                        <ChildrenName style={{ fontSize: language === 'తెలుగు' && `20px`}}>{language === 'english' ? item.name : getTeluguWords(item.name)}</ChildrenName>
                         <Presents>presents: <AttendanceCount count={item.presents}>{item.presents}</AttendanceCount></Presents>
                     </ChildrenStatus>
                 ))}
@@ -304,7 +334,7 @@ const ViewAttendance = () => {
             {apiResponseData.dateViceDetailsArray.slice(start, end).map(item => (
             <DailyStatusChildern key={item.name} present={item.presents}>
                     <FirstLetterContainer date='true' present={item.presents}>{item.name[0].toUpperCase()}</FirstLetterContainer>
-                    <ChildrenName>{item.name}</ChildrenName>
+                    <ChildrenName style={{ fontSize: language === 'తెలుగు' && `20px`}}>{language === 'english' ? item.name : getTeluguWords(item.name)}</ChildrenName>
                     <Presents>{item.presents === 1 ? <FcOk size={25}/> : <FcCancel size={25}/>}</Presents>
             </DailyStatusChildern>
             ))}
@@ -375,6 +405,10 @@ const ViewAttendance = () => {
         }
       }
 
+      const changeLanguage = (event) => {
+        setLanguage(event.target.value)
+      }
+
     return (
         
     <ViewContainer>
@@ -384,6 +418,10 @@ const ViewAttendance = () => {
                 <HomeImage alt='home' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709379149/tjrzexavkxpfacg5atjf.gif'/>
                   
                 </BackBtn>
+                <SelectInput defaultValue={language} onChange={changeLanguage}>
+                    <Option  value='english'>English</Option>
+                    <Option style={{letterSpacing: '0.7em'}}  value='తెలుగు'>తెలుగు</Option>
+                </SelectInput>
         </BackBtnContainer>
         <Heading><HighlatedText>Children</HighlatedText> Attendance Details</Heading>
         

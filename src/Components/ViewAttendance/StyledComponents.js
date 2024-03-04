@@ -12,8 +12,6 @@ export const ViewContainer = styled.div`
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    
-    
 `
 export const Heading = styled.h1`
     font-family: Mandali;
@@ -267,18 +265,22 @@ export const SelctDateHead = styled.h1`
 export const SelectInput = styled.select`
      outline: none;
      color: #000;
-     font-size: 18px;
-     font-family: Mandali;
+     font-size: 15px;
+     font-family: 'Mandali', sans-serif;
+     line-height: 18px;
+     margin-left: auto;
      letter-spacing: 0.03em;
      cursor: pointer;
      font-weight: 600;
      background-color: rgba(219, 219, 219, 0.27000001072883606);
-     padding: 3px 13px 3px 13px;
+     padding: 2px 8px 2px 8px;
      border: 1px solid #fff;
+     color: #fff;
      border-radius: 7px;
      @media (max-width: 500px) {
-           font-size: 14px;
-           padding: 5px 9px 5px 9px;
+           font-size: 12px;
+           line-height: 15px;
+           padding: 2px 5px 2px 5px;
      }
 `
 export const SelectDateInputContainer = styled.div`
@@ -293,10 +295,12 @@ export const DateLabel = styled.label`
        line-height: 20px;
        color: #fff;
 `
-export const DateOption = styled.option`
-   font-family: Mandali;
+export const Option = styled.option`
+   font-family: "Mandali", sans-serif;
    cursor: pointer;
-   font-size: 20px;
+   color: #000;
+   font-size: 18px;
+   line-height: 20px;
 `
 
 export const DateContainer = styled.div`
@@ -433,6 +437,7 @@ export const BackBtnContainer = styled.div`
       align-self: center;
       align-items: center;
       align-self: center;
+      
 `
 export const BackBtn = styled.button`
      border: none;

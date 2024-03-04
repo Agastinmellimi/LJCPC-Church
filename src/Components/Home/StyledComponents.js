@@ -83,6 +83,7 @@ export const TabsContentContainer = styled.div`
       align-items: stretch;
       width: 90%;
       height: 170px;
+      margin-bottom: 18px;
       @media (max-width: 300px) {
            flex-direction: column;
            align-items: center;
