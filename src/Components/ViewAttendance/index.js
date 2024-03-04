@@ -233,7 +233,7 @@ const ViewAttendance = () => {
    const getTeluguWords = (name) => {
        switch (name) {
             case 'ADYA MADHABATHULA':
-                return 'ఆద్య మధబత్తుల'
+                return 'ఆద్య మాధబత్తుల'
             case "MOJESH CHELLE":
                 return 'మోజేష్ చెల్లె'
             case "HANI MADHABATHULA":
