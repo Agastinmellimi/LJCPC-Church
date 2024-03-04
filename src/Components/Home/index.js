@@ -41,20 +41,20 @@ const Home = () => {
                 <Tab onClick={() => navigate('/attendance-details')}>
                   <TabNameContainer>
                       <TabName>Children Attendance</TabName>
-                      <TbMickey size={22} data-aos='slide-right' data-aos-easing="linear" color='#fff'/>
+                      <TbMickey size={22} data-aos='fade' data-aos-easing="linear" color='#fff'/>
                   </TabNameContainer>
                   </Tab>
                 <Tab graph='true' onClick={() => navigate('/children-progress')}>
                 <TabNameContainer >
                       <TabName>Children Progress</TabName>
-                      <VscGraph size={22} data-aos='slide-right' data-aos-easing="linear" color='#232324'/>
+                      <VscGraph size={22} data-aos='fade' data-aos-easing="linear" color='#232324'/>
                   </TabNameContainer>
                 </Tab>
             </TabsContainer>
             <AboutTab onClick={() => navigate('/about')}>
                   <TabNameContainer>
                       <TabName>About</TabName>
-                      <SiInformatica size={22} data-aos='slide-right' data-aos-easing="linear" style={{margin: 0}} color='#383838'/>
+                      <SiInformatica size={22} data-aos='fade' data-aos-easing="linear" style={{margin: 0}} color='#383838'/>
                   </TabNameContainer>
             </AboutTab>
           </TabsContentContainer>
