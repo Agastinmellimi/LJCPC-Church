@@ -237,7 +237,7 @@ export const Widgets = styled.li`
 export const SelectInput = styled.select`
      outline: none;
      color: #000;
-     font-size: 14px;
+     font-size: ${props => props.l === 'true' ? '16px' : '14px'};
      font-family: 'Mandali', sans-serif;
      line-height: 15px;
      margin-left: auto;
@@ -252,7 +252,7 @@ export const SelectInput = styled.select`
      color: #fff;
      border-radius: 7px;
      @media (max-width: 500px) {
-           font-size: 12px;
+           font-size: ${props => props.l === 'true' ? '14px' : '12px'};
            line-height: 15px;
      }
      transition: all 0.4s ease-in-out;

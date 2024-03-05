@@ -84,7 +84,7 @@ const Home = () => {
                 <Widgets language='true'>
                     <NameContainer>
                           <TabName style={{marginBottom: 3}}>{language === 'english'? 'Language' : 'భాష'}</TabName>
-                          <SelectInput defaultValue={language} onChange={(event) => setLanguage(event.target.value)}>
+                          <SelectInput l={(language === 'తెలుగు').toString()} defaultValue={language} onChange={(event) => setLanguage(event.target.value)}>
                               <Option  value='english'>English</Option>
                               <Option style={{letterSpacing: '0.7em'}}  value='తెలుగు'>తెలుగు</Option>
                           </SelectInput>
