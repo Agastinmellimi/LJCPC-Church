@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
+import HandlerContext from '../../Context/HandlerContext';
 import BarLoader from "react-spinners/BarLoader";
 import { IoSearch } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
@@ -58,7 +59,6 @@ export const Graph = () => {
   
     const [barHide, handleBar] =  useState(false)
     const [WindowWidth, setWidth] = useState(window.innerWidth)
-    const [language, setLanguage] = useState('english')
     const navigate = useNavigate()
 
     const getTeluguWords = (name) => {
@@ -120,7 +120,7 @@ export const Graph = () => {
         })
     }
 
-    const renderStatusFailureView = () => (
+    const renderStatusFailureView = (language) => (
         <FailureContainer>
             <FailureImage alt='failure-view' src={apiResponseData.failureImage}/>
             <ErrorMessage>
@@ -168,7 +168,7 @@ export const Graph = () => {
     }
     
 
-    const renderSuccessView = () => (
+    const renderSuccessView = (language) => (
         <>
         <MonthName>{language === 'english' ? apiResponseData.monthName : getTeluguMonthName(apiResponseData.month)} {language === 'english' ? `${apiResponseData.yearText}th`:`${apiResponseData.yearText}వ`} Report</MonthName>
         <ResponsiveContainer width="90%" height='65%' style={{alignSelf: 'center', flexShrink: 0, marginTop: 20}}>
@@ -199,16 +199,16 @@ export const Graph = () => {
 
     
 
-    const renderCorrespondingView = () => {
+    const renderCorrespondingView = (language) => {
         const {childrenStatus} = apiResponseData
     
         switch (childrenStatus) {
           case apiStatus.inProgress:
             return renderLoaderView()
           case apiStatus.success:
-            return renderSuccessView()
+            return renderSuccessView(language)
           case apiStatus.failure:
-            return renderStatusFailureView()
+            return renderStatusFailureView(language)
           default:
             return null
         }
@@ -357,42 +357,46 @@ export const Graph = () => {
         }
     }
 
-    const changeLanguage = (event) => {
-        setLanguage(event.target.value)
-      }
-
+   
 
     return (
-        <GraphContainer>
-        <BackBtnContainer>
-            <IoIosArrowBack color='#fff'  className="icon"/>
-            <BackBtn type='button' onClick={() => navigate('/')}>
-                <HomeImage alt='home' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709379149/tjrzexavkxpfacg5atjf.gif'/>
-                  
-                </BackBtn>
-                <SelectInput defaultValue={language} onChange={changeLanguage}>
-                    <Option  value='english'>English</Option>
-                    <Option style={{letterSpacing: '0.7em'}}  value='తెలుగు'>తెలుగు</Option>
-                </SelectInput>
-        </BackBtnContainer>
-        <Heading>Children Status Graphical view</Heading>
-            <Note style={{fontSize: language === 'తెలుగు' && '15px'}}>
-                    *{language === 'english' ? 'please fill in the required input fields only numbers, do not fill in any characters or symbols.'
-                : 'దయచేసి అవసరమైన ఇన్‌పుట్ ఫీల్డ్‌లలో సంఖ్యలను మాత్రమే పూరించండి, ఏ అక్షరాలు లేదా చిహ్నాలను పూరించవద్దు.'}
-            </Note>
-        <SearchContainer onSubmit={submitForm}>
-            <InputFeild>
-                {apiResponseData.monthErr && <InputError style={{fontSize: language === 'తెలుగు' && '14px'}}>{language === 'english' ? 'Please fill month input feild' : 'దయచేసి నెల ఇన్‌పుట్‌ని పూరించండి'}</InputError>}
-                <MonthInput err={apiResponseData.monthErr.toString()} type='text' value={apiResponseData.month} onChange={onChangeMonth} placeholder='MM'/>   
-            </InputFeild>
-            <InputFeild>
-                {apiResponseData.yearErr && <InputError style={{fontSize: language === 'తెలుగు' && '14px'}}>{language === 'english' ? 'Please fill year input feild' : 'దయచేసి సంవత్సరం ఇన్‌పుట్‌ని పూరించండి'}</InputError>}
-                <YearInput err={apiResponseData.yearErr.toString()} type='text' value={apiResponseData.year} onChange={onChangeYear} placeholder='YYYY'/>
-            </InputFeild>
-            <SearchBtn icon={(barHide === false).toString()} type='submit'>{barHide ? 'Search' : <IoSearch size={30} color='#fff'/>}</SearchBtn>
-        </SearchContainer>
-        {renderCorrespondingView()}
-        </GraphContainer>
+      <HandlerContext.Consumer>
+                {value => {
+                    const {language, setLanguage} = value
+                    return (
+                        <GraphContainer>
+                        <BackBtnContainer>
+                            <IoIosArrowBack color='#fff'  className="icon"/>
+                            <BackBtn type='button' onClick={() => navigate('/')}>
+                                <HomeImage alt='home' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709379149/tjrzexavkxpfacg5atjf.gif'/>
+                                  
+                                </BackBtn>
+                                <SelectInput defaultValue={language} onChange={(event) => setLanguage(event.target.value)}>
+                                    <Option  value='english'>English</Option>
+                                    <Option style={{letterSpacing: '0.7em'}}  value='తెలుగు'>తెలుగు</Option>
+                                </SelectInput>
+                        </BackBtnContainer>
+                        <Heading>Children Status Graphical view</Heading>
+                            <Note style={{fontSize: language === 'తెలుగు' && '15px'}}>
+                                    *{language === 'english' ? 'please fill in the required input fields only numbers, do not fill in any characters or symbols.'
+                                : 'దయచేసి అవసరమైన ఇన్‌పుట్ ఫీల్డ్‌లలో సంఖ్యలను మాత్రమే పూరించండి, ఏ అక్షరాలు లేదా చిహ్నాలను పూరించవద్దు.'}
+                            </Note>
+                        <SearchContainer onSubmit={submitForm}>
+                            <InputFeild>
+                                {apiResponseData.monthErr && <InputError style={{fontSize: language === 'తెలుగు' && '14px'}}>{language === 'english' ? 'Please fill month input feild' : 'దయచేసి నెల ఇన్‌పుట్‌ని పూరించండి'}</InputError>}
+                                <MonthInput err={apiResponseData.monthErr.toString()} type='text' value={apiResponseData.month} onChange={onChangeMonth} placeholder='MM'/>   
+                            </InputFeild>
+                            <InputFeild>
+                                {apiResponseData.yearErr && <InputError style={{fontSize: language === 'తెలుగు' && '14px'}}>{language === 'english' ? 'Please fill year input feild' : 'దయచేసి సంవత్సరం ఇన్‌పుట్‌ని పూరించండి'}</InputError>}
+                                <YearInput err={apiResponseData.yearErr.toString()} type='text' value={apiResponseData.year} onChange={onChangeYear} placeholder='YYYY'/>
+                            </InputFeild>
+                            <SearchBtn icon={(barHide === false).toString()} type='submit'>{barHide ? 'Search' : <IoSearch size={30} color='#fff'/>}</SearchBtn>
+                        </SearchContainer>
+                        {renderCorrespondingView(language)}
+                        </GraphContainer>
+                    )
+                }}
+      </HandlerContext.Consumer>
     )
 }
 

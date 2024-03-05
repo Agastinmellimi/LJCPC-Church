@@ -9,6 +9,7 @@ import {Skeleton} from 'react-skeleton-generator'
 import { TbPlayerTrackNext } from "react-icons/tb";
 import { TbPlayerTrackPrev } from "react-icons/tb";
 import { IoIosArrowBack } from "react-icons/io";
+import HandlerContext from '../../Context/HandlerContext';
 
 
 import {
@@ -72,7 +73,7 @@ const ViewAttendance = () => {
 
     const [currentPage, setCurrentPage] = useState(1)
 
-    const [language, setLanguage] = useState('english')
+    
 
     const [WindowWidth, setWidth] = useState(window.innerWidth)
   
@@ -283,7 +284,7 @@ const ViewAttendance = () => {
         setSearchDate('')
     }
 
-    const renderStatusFailureView = () => (
+    const renderStatusFailureView = (language) => (
         <FailureContainer>
             <FailureImage alt='failure-view' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709099344/ocxgxmjr1xhk24uitho6.png'/>
             <ErrorMessage>{language === 'english' ? 'We cannot seem to find the page you are looking for.' : 'మీరు వెతుకుతున్న సమాచారాన్ని మేము కనుగొనలేకపోయాము.'}</ErrorMessage>
@@ -291,7 +292,7 @@ const ViewAttendance = () => {
         </FailureContainer>
     )
 
-    const renderDateFailureView = () => (
+    const renderDateFailureView = (language) => (
         <FailureContainer>
             <FailureImage alt='failure-view' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709099344/ocxgxmjr1xhk24uitho6.png'/>
             <ErrorMessage>{language === 'english' ? 'We cannot seem to find the page you are looking for.' : 'మీరు వెతుకుతున్న సమాచారాన్ని మేము కనుగొనలేకపోయాము.'}</ErrorMessage>
@@ -315,8 +316,8 @@ const ViewAttendance = () => {
 
     const startIndex = (currentPage - 1) * 6;
     const endIndex = startIndex + 6;
-    console.log(language)
-    const renderSuccessChildrensStatusView = () => (
+    
+    const renderSuccessChildrensStatusView = (language) => (
            <>
             <ViewChildrenContainer>
                 {apiResponseData.childrenStatusArray.slice(startIndex, endIndex).map(item => (
@@ -339,7 +340,7 @@ const ViewAttendance = () => {
 
 
 
-    const renderDateViceChildernStatusView = () => {
+    const renderDateViceChildernStatusView = (language) => {
         const handlePrev = () => { 
             setPage(prevPage => prevPage - 1);
         }
@@ -372,31 +373,31 @@ const ViewAttendance = () => {
 
     
 
-    const renderDateViceAttendanceView = () => {
+    const renderDateViceAttendanceView = (language) => {
         const {datesViseApiStatus} = apiResponseData
     
         switch (datesViseApiStatus) {
           case apiStatus.inProgress:
             return skeletonView()
           case apiStatus.success:
-            return renderDateViceChildernStatusView()
+            return renderDateViceChildernStatusView(language)
           case apiStatus.failure:
-            return renderDateFailureView()
+            return renderDateFailureView(language)
           default:
             return null
         }
       }
 
-      const renderAttendanceDetailsView = () => {
+      const renderAttendanceDetailsView = (language) => {
         const {childrenStatus} = apiResponseData
     
         switch (childrenStatus) {
           case apiStatus.inProgress:
             return skeletonView()
           case apiStatus.success:
-            return renderSuccessChildrensStatusView()
+            return renderSuccessChildrensStatusView(language)
           case apiStatus.failure:
-            return renderStatusFailureView()
+            return renderStatusFailureView(language)
           default:
             return null
         }
@@ -426,62 +427,67 @@ const ViewAttendance = () => {
         }
       }
 
-      const changeLanguage = (event) => {
-        setLanguage(event.target.value)
-      }
+     
 
     return (
         
-    <ViewContainer>
-       <BackBtnContainer>
-            <IoIosArrowBack color='#fff'  className="icon"/>
-            <BackBtn type='button' onClick={() => navigate('/')}>
-                <HomeImage alt='home' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709379149/tjrzexavkxpfacg5atjf.gif'/>
-                  
-                </BackBtn>
-                <SelectInput defaultValue={language} onChange={changeLanguage}>
-                    <Option  value='english'>English</Option>
-                    <Option style={{letterSpacing: '0.7em'}}  value='తెలుగు'>తెలుగు</Option>
-                </SelectInput>
-        </BackBtnContainer>
-        <Heading><HighlatedText>{language === 'english' ? 'Children': 'పిల్లల'}</HighlatedText> {language === 'english' ? 'Attendance details': 'హాజరు వివరాలు'}</Heading>
-        
-        <Skeleton.SkeletonThemeProvider highlight="light" animationDuration={1} color="#919190" style={{alignSelf: 'center', display: 'flex', flexDirection: 'column', width: '100%'}}>
-          {renderAttendanceDetailsView()}
-        </Skeleton.SkeletonThemeProvider>
-        {apiResponseData.dateError ? renderDateFailureView() : (
-            <>
-            <SelectDateContainer>
-                <SelctDateHead>{language === 'english' ? 'Attendance details by Dates': 'తేదీల వారీగా హాజరు వివరాలు'}</SelctDateHead>
-                <SearchDataContainer>
-                    <SearchDateInput type='date' value={searchDate} placeholder='YYYY/MM/DD' onChange={changeDate}/>
-                    <ReactTooltip id='searchDate' place='bottom' anchorSelect="#not-clickable" className='tool'/>
-                    <SearchBtn type='button' data-tooltip-id='searchDate' data-tooltip-content={"Search by Date"} onClick={onSearchDate}><FaSearch/></SearchBtn>
-                </SearchDataContainer>
-            </SelectDateContainer>
-           
-            {isSearch ? (
-                searchErr ? (
-                    <DateContainer>
-                        <DateImage alt='select date' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1707990706/k3yuvyjhdhdr0kqirv7j.png'/>
-                        <SelectDateText>{language === 'english' ? 'Your search date cannot in backend': 'మీ శోధన తేదీ ఉనికిలో లేదు'}</SelectDateText>
-                    </DateContainer>
-                ) : (
-                    <Skeleton.SkeletonThemeProvider highlight="light" animationDuration={1} color="#919190" style={{alignSelf: 'center', display: 'flex', flexDirection: 'column', width: '100%'}}>
-                    {renderDateViceAttendanceView()}
-                    </Skeleton.SkeletonThemeProvider>
-                    )
-            ) : (
-                <DateContainer>
-                        <DateImage alt='select date' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709103464/bxm9dnwyw5h0qmkk2llb.png'/>
-                        <SelectDateText>{language === 'english' ? 'Search by date and get your details' : 'తేదీ ద్వారా శోధించండి మరియు వివరాలను పొందండి'}</SelectDateText>
-                </DateContainer>
-            )}
-           
-            </>
-        )}
-        
-    </ViewContainer>
+         <HandlerContext.Consumer>
+               {value => {
+                     const {language, setLanguage} = value
+                     return (
+                        <ViewContainer>
+                        <BackBtnContainer>
+                             <IoIosArrowBack color='#fff'  className="icon"/>
+                             <BackBtn type='button' onClick={() => navigate('/')}>
+                                 <HomeImage alt='home' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709379149/tjrzexavkxpfacg5atjf.gif'/>
+                                   
+                                 </BackBtn>
+                                 <SelectInput defaultValue={language} onChange={(event) => setLanguage(event.target.value)}>
+                                     <Option  value='english'>English</Option>
+                                     <Option style={{letterSpacing: '0.7em'}}  value='తెలుగు'>తెలుగు</Option>
+                                 </SelectInput>
+                         </BackBtnContainer>
+                         <Heading><HighlatedText>{language === 'english' ? 'Children': 'పిల్లల'}</HighlatedText> {language === 'english' ? 'Attendance details': 'హాజరు వివరాలు'}</Heading>
+                         
+                         <Skeleton.SkeletonThemeProvider highlight="light" animationDuration={1} color="#919190" style={{alignSelf: 'center', display: 'flex', flexDirection: 'column', width: '100%'}}>
+                           {renderAttendanceDetailsView()}
+                         </Skeleton.SkeletonThemeProvider>
+                         {apiResponseData.dateError ? renderDateFailureView() : (
+                             <>
+                             <SelectDateContainer>
+                                 <SelctDateHead>{language === 'english' ? 'Attendance details by Dates': 'తేదీల వారీగా హాజరు వివరాలు'}</SelctDateHead>
+                                 <SearchDataContainer>
+                                     <SearchDateInput type='date' value={searchDate} placeholder='YYYY/MM/DD' onChange={changeDate}/>
+                                     <ReactTooltip id='searchDate' place='bottom' anchorSelect="#not-clickable" className='tool'/>
+                                     <SearchBtn type='button' data-tooltip-id='searchDate' data-tooltip-content={"Search by Date"} onClick={onSearchDate}><FaSearch/></SearchBtn>
+                                 </SearchDataContainer>
+                             </SelectDateContainer>
+                            
+                             {isSearch ? (
+                                 searchErr ? (
+                                     <DateContainer>
+                                         <DateImage alt='select date' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1707990706/k3yuvyjhdhdr0kqirv7j.png'/>
+                                         <SelectDateText>{language === 'english' ? 'Your search date cannot in backend': 'మీ శోధన తేదీ ఉనికిలో లేదు'}</SelectDateText>
+                                     </DateContainer>
+                                 ) : (
+                                     <Skeleton.SkeletonThemeProvider highlight="light" animationDuration={1} color="#919190" style={{alignSelf: 'center', display: 'flex', flexDirection: 'column', width: '100%'}}>
+                                     {renderDateViceAttendanceView()}
+                                     </Skeleton.SkeletonThemeProvider>
+                                     )
+                             ) : (
+                                 <DateContainer>
+                                         <DateImage alt='select date' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709103464/bxm9dnwyw5h0qmkk2llb.png'/>
+                                         <SelectDateText>{language === 'english' ? 'Search by date and get your details' : 'తేదీ ద్వారా శోధించండి మరియు వివరాలను పొందండి'}</SelectDateText>
+                                 </DateContainer>
+                             )}
+                            
+                             </>
+                         )}
+                         
+                     </ViewContainer>
+                     )
+               }}
+         </HandlerContext.Consumer>
   
 )}
 
