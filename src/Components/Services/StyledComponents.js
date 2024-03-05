@@ -92,6 +92,7 @@ export const ServiceName = styled.p`
     line-height: 13px;
     margin-bottom:9px;
     padding-left: 2px;
+    margin-top: 6px;
     @media (max-width: 500px) {
         font-size: 15px;
         margin-bottom:5px;
