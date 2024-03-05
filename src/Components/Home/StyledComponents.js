@@ -8,8 +8,6 @@ export const Container = styled.div`
     justify-content: center;
     overflow: auto;
     padding-top: 20px;
-    
-
     background-image: url("https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709435168/zd63qllzqaqwpu0g4zjd.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -42,10 +40,10 @@ export const BannerContainer = styled.div`
     flex-direction: column;
     align-items: center;
     width: 90%;
+    flex-shrink: 0;
     margin-top: 30px;
     backdrop-filter: blur(2px);
     border-radius: 10px;
-    
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
