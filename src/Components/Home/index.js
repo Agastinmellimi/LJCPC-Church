@@ -26,7 +26,7 @@ import {
   Widgets,
   SelectInput,
   Option,
-  NameContainer
+  
 } from './StyledComponents'
 import 'aos/dist/aos.css';
 
@@ -82,13 +82,13 @@ const Home = () => {
                       </TabNameContainer>
                 </Widgets>
                 <Widgets language='true'>
-                    <NameContainer>
-                          <TabName l={(language === 'తెలుగు').toString()} style={{marginBottom: 3}}>{language === 'english'? 'Language' : 'భాష'}</TabName>
+                    
+                         
                           <SelectInput l={(language === 'తెలుగు').toString()} defaultValue={language} onChange={(event) => setLanguage(event.target.value)}>
                               <Option  value='english'>English</Option>
                               <Option style={{letterSpacing: '0.7em'}}  value='తెలుగు'>తెలుగు</Option>
                           </SelectInput>
-                      </NameContainer>
+                      
                 </Widgets>
                 
                 <Widgets youtube='true'>

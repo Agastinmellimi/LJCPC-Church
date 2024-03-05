@@ -245,13 +245,15 @@ export const Widgets = styled.li`
 export const SelectInput = styled.select`
      outline: none;
      color: #000;
-     font-size: ${props => props.l === 'true' ? '20px' : '14px'};
+     font-size: ${props => props.l === 'true' ? '23px' : '20px'};
      font-family: 'Mandali', sans-serif;
      line-height: 15px;
      margin-left: auto;
      text-shadow: 1px 1px 2px #595a5c;
      letter-spacing: 0.03em;
      cursor: pointer;
+     width: 100%;
+     height: 100%;
      font-weight: 600;
      background-color: transparent;
      padding: 0 !important;
@@ -260,7 +262,7 @@ export const SelectInput = styled.select`
      color: #fff;
      border-radius: 7px;
      @media (max-width: 500px) {
-           font-size: ${props => props.l === 'true' ? '14px' : '12px'};
+           font-size: ${props => props.l === 'true' ? '18px' : '16px'};
            line-height: 15px;
      }
      transition: all 0.4s ease-in-out;
