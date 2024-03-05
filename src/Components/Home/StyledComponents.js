@@ -80,8 +80,8 @@ export const TabsContentContainer = styled.div`
       justify-content: space-between;
       align-items: stretch;
       width: 90%;
-      margin-bottom: 18px;
-      height: 300px;
+      margin-bottom: 5px;
+      
       @media (max-width: 300px) {
            flex-direction: column;
            align-items: center;
@@ -116,9 +116,11 @@ export const Tab = styled.li`
     background-color: #FBDA61;
     background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
     box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-    transition: transform 0.5s ease-in-out;
-    &:hover {
-        transform: translateX(-7px);
+    @media (min-width: 768px) {
+        transition: transform 0.5s ease-in-out;
+        &:hover {
+            transform: translateY(-5px);
+        }
     }
    
     @media (max-width: 300px) {
@@ -139,18 +141,18 @@ export const AboutTab = styled.div`
   background-color: #FF3CAC;
   background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-    transition: transform 0.5s ease-in-out;
-    &:hover {
-        transform: translateX(7px);
+    
+    @media (min-width: 768px) {
+        transition: transform 0.5s ease-in-out;
+        &:hover {
+            transform: translateY(-5px);
+        }
     }
     position: relative;
     @media (max-width: 300px) {
            width: 100%;
            margin-top: 15px;
            border-radius: 5px;
-           &:hover {
-                transform: translateX(-7px);
-            }
       }
       @media (max-width: 235px) {
            margin-top: 14px;
@@ -187,6 +189,7 @@ export const TabName = styled.p`
 export const WidgetsContainer = styled.ul`
       padding-left: 0;
       display: flex;
+      margin-top: 10px;
       align-items: stretch;
       width: 90%;
       align-self: center;
@@ -232,6 +235,12 @@ export const Widgets = styled.li`
 
      @media (max-width: 300px) {
           width: 100%;
+      }
+      @media (min-width: 768px) {
+        transition: transform 0.5s ease-in-out;
+        &:hover {
+            transform: translateY(-5px);
+        }
       }
 `
 export const SelectInput = styled.select`
