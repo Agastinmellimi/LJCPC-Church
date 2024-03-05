@@ -170,7 +170,8 @@ export const TabNameContainer  = styled.div`
 `
 export const TabName = styled.p`
     font-family: "Mandali", sans-serif;
-    font-size: 18px;
+    font-size: ${props => props.l === 'true' ? '22px' : '18px'};
+    letter-spacing: ${props => props.l === 'true' && '0.15em'};
     word-break: keep-all;
     line-height: 20px;
     margin-right: 10px;
@@ -180,7 +181,8 @@ export const TabName = styled.p`
     font-weight: 700;
     padding: 0;
     @media (min-width: 768px) {
-        font-size: 20px;
+        font-size: ${props => props.l === 'true' ? '24px' : '20px'};
+        letter-spacing: ${props => props.l === 'true' && '0.10em'};
     }
 `
 
@@ -237,7 +239,7 @@ export const Widgets = styled.li`
 export const SelectInput = styled.select`
      outline: none;
      color: #000;
-     font-size: ${props => props.l === 'true' ? '16px' : '14px'};
+     font-size: ${props => props.l === 'true' ? '20px' : '14px'};
      font-family: 'Mandali', sans-serif;
      line-height: 15px;
      margin-left: auto;
