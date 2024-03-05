@@ -69,7 +69,7 @@ const Home = () => {
                 </TabsContainer>
                 <AboutTab onClick={() => navigate('/about')}>
                       <TabNameContainer>
-                          <TabName>{language === 'english'? 'Abput' : 'వివరాలు'}</TabName>
+                          <TabName>{language === 'english'? 'About' : 'వివరాలు'}</TabName>
                           <SiInformatica size={22} data-aos='fade' data-aos-easing="linear" style={{margin: 0}} color='#383838'/>
                       </TabNameContainer>
                 </AboutTab>
