@@ -40,7 +40,6 @@ export const BannerContainer = styled.div`
     flex-direction: column;
     align-items: center;
     width: 90%;
-    flex-shrink: 0;
     margin-top: 30px;
     backdrop-filter: blur(2px);
     border-radius: 10px;
