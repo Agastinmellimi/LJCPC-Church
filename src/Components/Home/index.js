@@ -77,7 +77,7 @@ const Home = () => {
               <WidgetsContainer>
                 <Widgets onClick={() => navigate('/church-timings')}>
                     <TabNameContainer>
-                          <TabName style={{color: '#163c80'}}>{language === 'english'? 'Prayer times' : 'ప్రార్థన సమయములు'}</TabName>
+                          <TabName >{language === 'english'? 'Prayer times' : 'ప్రార్థన సమయములు'}</TabName>
                           <PiTimerDuotone size={22} data-aos='fade' data-aos-easing="linear" color='#163c80'/>
                       </TabNameContainer>
                 </Widgets>
@@ -95,7 +95,7 @@ const Home = () => {
                  <a href='https://www.youtube.com/channel/UCi2Qnb1x9WdyEwvMLw6EnzQ' target='_blank' rel="noreferrer" style={{textDecoration: 'none', color: 'inherit', position: 'relative'}}>
                     <TabNameContainer>
                           <TabName>YouTube</TabName>
-                          <PiYoutubeLogoDuotone size={22} data-aos='fade' data-aos-easing="linear" color='#f53c2f'/>
+                          <PiYoutubeLogoDuotone size={22} data-aos='fade' data-aos-easing="linear" color='#f29196'/>
                       </TabNameContainer>
                   </a>
                 </Widgets>

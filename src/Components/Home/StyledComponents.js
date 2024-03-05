@@ -206,7 +206,7 @@ export const Widgets = styled.li`
      color: #000;
      width: 60%;
      height: 60px;
-     border-radius: 5px;
+     border-radius: 10px;
      padding: 4px 10px;
      font-family: "Mandali", sans-serif;
      background-color: #85FFBD;
