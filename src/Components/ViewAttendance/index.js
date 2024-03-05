@@ -450,7 +450,7 @@ const ViewAttendance = () => {
                          <Heading><HighlatedText>{language === 'english' ? 'Children': 'పిల్లల'}</HighlatedText> {language === 'english' ? 'Attendance details': 'హాజరు వివరాలు'}</Heading>
                          
                          <Skeleton.SkeletonThemeProvider highlight="light" animationDuration={1} color="#919190" style={{alignSelf: 'center', display: 'flex', flexDirection: 'column', width: '100%'}}>
-                           {renderAttendanceDetailsView()}
+                           {renderAttendanceDetailsView(language)}
                          </Skeleton.SkeletonThemeProvider>
                          {apiResponseData.dateError ? renderDateFailureView() : (
                              <>
@@ -471,7 +471,7 @@ const ViewAttendance = () => {
                                      </DateContainer>
                                  ) : (
                                      <Skeleton.SkeletonThemeProvider highlight="light" animationDuration={1} color="#919190" style={{alignSelf: 'center', display: 'flex', flexDirection: 'column', width: '100%'}}>
-                                     {renderDateViceAttendanceView()}
+                                     {renderDateViceAttendanceView(language)}
                                      </Skeleton.SkeletonThemeProvider>
                                      )
                              ) : (

@@ -5,7 +5,6 @@ export const Container = styled.div`
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     overflow: auto;
     padding-top: 20px;
     background-image: url("https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709435168/zd63qllzqaqwpu0g4zjd.jpg");
@@ -43,12 +42,7 @@ export const BannerContainer = styled.div`
     margin-top: 30px;
     backdrop-filter: blur(2px);
     border-radius: 10px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     align-self: center;
-    justify-content: space-between;
-    
 `
 
 export const BannerImage = styled.img`
@@ -68,7 +62,6 @@ export const BannerImage = styled.img`
 `
 
 export const BannerContent = styled.div`
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
 `
