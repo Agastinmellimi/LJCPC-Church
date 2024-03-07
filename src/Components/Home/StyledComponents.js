@@ -30,7 +30,7 @@ export const Heading = styled.h1`
     background-image: url('https://cdn.dribbble.com/users/398658/screenshots/8559608/media/8a98def8c49fe0bf1471c09272c2b45a.gif');
     @media (min-width: 700px) {
         font-size: 30px;
-        line-height: 40px;
+        line-height: 60px;
     }
 `
 
