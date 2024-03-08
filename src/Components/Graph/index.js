@@ -197,7 +197,6 @@ export const Graph = () => {
                         ...prev,
                         childrenStatus: apiStatus.failure,
                         errMsg: data.err_msg,
-                        
                     }))
                 }
             } catch (err) {
@@ -241,13 +240,24 @@ export const Graph = () => {
         })
     }
 
+    const getTeluguErrMsg = (message) => {
+        switch (message) {
+            case 'Sorry!, search year cannot exist':
+                return 'క్షమించండి!, శోధన సంవత్సరం ఉనికిలో లేదు'
+            case 'We cannot seem to find the page you are looking for.':
+                return 'మీరు వెతుకుతున్న సమాచారాన్ని మేము కనుగొనలేకపోయాము.'
+            case 'Sorry!, search month cannot exist':
+                return 'క్షమించండి!, శోధన నెల ఉనికిలో లేదు'
+            default:
+                return message
+        }
+    }
+
     const renderStatusFailureView = (language) => (
         <FailureContainer>
             {apiResponseData.smErr ? (<BiMessageSquareError size={60} color='#eb4b5b'/>) : <FailureImage alt='failure-view' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1707990706/k3yuvyjhdhdr0kqirv7j.png'/>}
             <ErrorMessage>
-                {apiResponseData.errMsg === 'Sorry!, search year cannot exist' ? 
-                (language === 'english' ? 'Sorry!, search year cannot exist' : 'క్షమించండి!, శోధన సంవత్సరం ఉనికిలో లేదు') 
-                : 'క్షమించండి!, శోధన నెల ఉనికిలో లేదు'}
+                {language === 'english' ? apiResponseData.errMsg : getTeluguErrMsg(apiResponseData.errMsg)}
             </ErrorMessage>
             <BtnContainer>
             <TryAgainBtn type='button' onClick={statusRefresh}>{language === 'english' ? "Try again" : 'మళ్ళీ ప్రయత్నించండి'}</TryAgainBtn>

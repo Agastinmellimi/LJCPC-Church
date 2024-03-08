@@ -56,10 +56,12 @@ export const ErrorMessage = styled.p`
   }
 `
 export const FailureImage = styled.img`
-         width: 150px;
-       @media (max-width: 500px) {
-          width: 50px;
-        }
+         width: 70%;
+         max-width: 200px;
+         @media (max-width: 500px){
+            max-width: 130;
+         }
+       
 `
 export const TryAgainBtn = styled.button`
      border: none;
