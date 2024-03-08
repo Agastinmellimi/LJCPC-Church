@@ -172,7 +172,7 @@ export const Graph = () => {
         <>
         <MonthName>{language === 'english' ? apiResponseData.monthName : getTeluguMonthName(apiResponseData.month)} {language === 'english' ? `${apiResponseData.yearText}th`:`${apiResponseData.yearText}వ`} Report</MonthName>
         <ResponsiveContainer width="90%" height='65%' style={{alignSelf: 'center', flexShrink: 0, marginTop: 20}}>
-                <BarChart  data={apiResponseData.childrenStatusArray.map(item => ({...item, name: language === 'english' ? item.name.split(' ')[0] : getTeluguWords(item.name)}))} height={300} margin={{
+                <BarChart  data={apiResponseData.childrenStatusArray.map(item => ({...item, name: language === 'english' ? item.name.split(' ')[0] : getTeluguWords(item.name),  హాజరు: item.presents}))} height={300} margin={{
                 top: 20,
                 right: 30,
                 left: 20,
@@ -183,7 +183,7 @@ export const Graph = () => {
                     <Tooltip trigger='hover' cursor={{fill: 'transparent'}}  contentStyle={{fontWeight: 'bold', fontFamily: "Mandali", backgroundColor: "rgba(193, 221, 139, 0.81)", backdropFilter: 'blur(3px)', color: "#fff", borderRadius: '6px', fontSize: 20, lineHeight: '25px'}}/>
                     <Legend />
                     <XAxis type='category' dataKey='name' tick={barHide === true ? {fill: "#fff"} : false} stroke="#f5d86e"   interval={0} style={{fontSize: language === 'english' ? 10 : 15, fontFamily: "Mandali, sans-serif", fontStyle: 'italic'}}/>
-                    <Bar dataKey="presents" label={barHide === false && {dataKey:'name', position: 'insideUp', angle: '-90', stroke: "#f5d86e", fontSize: language === 'english' ? '12px' : '13px', letterSpacing: '0.20em'}} fill="#097569" maxBarSize={45}   style={{cursor: "pointer", fontSize: 8, fontFamily: "Mandali, sans-serif"}} />
+                    <Bar dataKey={language === 'english' ? 'presents' : 'హాజరు'} label={barHide === false && {dataKey:'name', position: 'insideUp', angle: '-90', stroke: "#f5d86e", fontSize: language === 'english' ? '12px' : '13px', letterSpacing: '0.20em'}} fill="#097569" maxBarSize={45}   style={{cursor: "pointer", fontSize: 8, fontFamily: "Mandali, sans-serif"}} />
                 </BarChart>
         </ResponsiveContainer>
         
@@ -376,7 +376,7 @@ export const Graph = () => {
                                     <Option style={{letterSpacing: '0.7em'}}  value='తెలుగు'>తెలుగు</Option>
                                 </SelectInput>
                         </BackBtnContainer>
-                        <Heading>Children Status Graphical view</Heading>
+                        <Heading>{language === 'english' ? 'Children Status Graphical view' : 'పిల్లల హాజరు రేఖ చిత్రములలో'}</Heading>
                             <Note style={{fontSize: language === 'తెలుగు' && '15px'}}>
                                     *{language === 'english' ? 'please fill in the required input fields only numbers, do not fill in any characters or symbols.'
                                 : 'దయచేసి అవసరమైన ఇన్‌పుట్ ఫీల్డ్‌లలో సంఖ్యలను మాత్రమే పూరించండి, ఏ అక్షరాలు లేదా చిహ్నాలను పూరించవద్దు.'}
@@ -390,7 +390,7 @@ export const Graph = () => {
                                 {apiResponseData.yearErr && <InputError style={{fontSize: language === 'తెలుగు' && '14px'}}>{language === 'english' ? 'Please fill year input feild' : 'దయచేసి సంవత్సరం ఇన్‌పుట్‌ని పూరించండి'}</InputError>}
                                 <YearInput err={apiResponseData.yearErr.toString()} type='text' value={apiResponseData.year} onChange={onChangeYear} placeholder='YYYY'/>
                             </InputFeild>
-                            <SearchBtn icon={(barHide === false).toString()} type='submit'>{barHide ? 'Search' : <IoSearch size={30} color='#fff'/>}</SearchBtn>
+                            <SearchBtn icon={(barHide === false).toString()} type='submit'>{barHide ? (language === 'english' ? 'Search' : 'శోధించు') : <IoSearch size={30} color='#fff'/>}</SearchBtn>
                         </SearchContainer>
                         {renderCorrespondingView(language)}
                         </GraphContainer>

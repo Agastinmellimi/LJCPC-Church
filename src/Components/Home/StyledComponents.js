@@ -39,7 +39,7 @@ export const BannerContainer = styled.div`
     flex-direction: column;
     align-items: center;
     width: 90%;
-    margin-top: 30px;
+    margin-top: 20px;
     backdrop-filter: blur(2px);
     border-radius: 10px;
     align-self: center;
@@ -218,7 +218,7 @@ export const Widgets = styled.li`
      `}
      ${props => props.youtube === 'true' && `
            background-color: #003e62;
-           width: 100%;
+           width: 60%;
            background-image: linear-gradient(203deg, #003e62 0%, #f8ff7d 100%);
 
      `}
