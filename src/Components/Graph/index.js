@@ -272,7 +272,7 @@ export const Graph = () => {
     const renderSuccessView = (language) => (
         <>
         <MonthName>{language === 'english' ? apiResponseData.EnglishMonthName : apiResponseData.TeluguMonthName} {language === 'english' ? `${apiResponseData.yearText}th Report`:`${apiResponseData.yearText}వ నివేదిక`}</MonthName>
-        <ResponsiveContainer width="90%" height='65%' style={{alignSelf: 'center', flexShrink: 0, marginTop: 20}}>
+        <ResponsiveContainer width="90%" height='55%' style={{alignSelf: 'center', flexShrink: 0, marginTop: 20}}>
                 <BarChart  data={apiResponseData.childrenStatusArray.map(item => ({...item, name: language === 'english' ? item.name.split(' ')[0] : getTeluguWords(item.name),  హాజరు: item.presents}))} height={300} margin={{
                 top: 20,
                 right: 30,
