@@ -9,6 +9,7 @@ import {Skeleton} from 'react-skeleton-generator'
 import { TbPlayerTrackNext } from "react-icons/tb";
 import { TbPlayerTrackPrev } from "react-icons/tb";
 import { IoIosArrowBack } from "react-icons/io";
+import { BiMessageSquareError } from "react-icons/bi";
 import HandlerContext from '../../Context/HandlerContext';
 
 
@@ -32,7 +33,6 @@ import {
     SearchDataContainer,
     SearchBtn,
     SearchDateInput,
-    FailureImage,
     TryAgainBtn,
     PagenationContainer,
     NextButton,
@@ -286,7 +286,7 @@ const ViewAttendance = () => {
 
     const renderStatusFailureView = (language) => (
         <FailureContainer>
-            <FailureImage alt='failure-view' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709099344/ocxgxmjr1xhk24uitho6.png'/>
+            <BiMessageSquareError size={60} color='#eb4b5b'/>
             <ErrorMessage>{language === 'english' ? 'We cannot seem to find the page you are looking for.' : 'మీరు వెతుకుతున్న సమాచారాన్ని మేము కనుగొనలేకపోయాము.'}</ErrorMessage>
             <TryAgainBtn type='button' onClick={statusRefresh}>{language === 'english' ? "Try again" : 'మళ్ళీ ప్రయత్నించండి'}</TryAgainBtn>
         </FailureContainer>
@@ -294,7 +294,7 @@ const ViewAttendance = () => {
 
     const renderDateFailureView = (language) => (
         <FailureContainer>
-            <FailureImage alt='failure-view' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709099344/ocxgxmjr1xhk24uitho6.png'/>
+            <BiMessageSquareError size={60} color='#eb4b5b'/>
             <ErrorMessage>{language === 'english' ? 'We cannot seem to find the page you are looking for.' : 'మీరు వెతుకుతున్న సమాచారాన్ని మేము కనుగొనలేకపోయాము.'}</ErrorMessage>
             <TryAgainBtn type='button' onClick={refershDates}>{language === 'english' ? "Try again" : 'మళ్ళీ ప్రయత్నించండి'}</TryAgainBtn>
         </FailureContainer>

@@ -4,6 +4,7 @@ import HandlerContext from '../../Context/HandlerContext';
 import BarLoader from "react-spinners/BarLoader";
 import { IoSearch } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
+import { BiMessageSquareError } from "react-icons/bi";
 import {
     Bar,
     XAxis,
@@ -54,7 +55,7 @@ export const Graph = () => {
         yearErr: false,
         monthName: '',
         yearText: '',
-        failureImage: ''
+        smErr: false
   })
   
     const [barHide, handleBar] =  useState(false)
@@ -90,107 +91,13 @@ export const Graph = () => {
         }
     }
 
-    useEffect(() => {
-        window.addEventListener('resize', () => {
-            setWidth(window.innerWidth);
-          });
-        if (WindowWidth >= 700) {
-            handleBar(true)
-        } else {
-            handleBar(false)
-        }
-    }, [WindowWidth])
-
-    const statusRefresh = () => {
-        getChildrenDetails()
-    }
-
-    const refresh = () => {
-        setApiResponseData({
-            childrenStatus: apiStatus.initial,
-            childrenStatusArray: [],
-            month: '',
-            year: '',
-            errMsg: '',
-            monthErr: false,
-            yearErr: false,
-            EnglishMonthName: '',
-            TeluguMonthName: '',
-            yearText: '',
-            failureImage: ''
-        })
-    }
-
-    const renderStatusFailureView = (language) => (
-        <FailureContainer>
-            <FailureImage alt='failure-view' src={apiResponseData.failureImage}/>
-            <ErrorMessage>
-                {apiResponseData.errMsg === 'Sorry!, search year cannot exist' ? 
-                (language === 'english' ? 'Sorry!, search year cannot exist' : 'క్షమించండి!, శోధన సంవత్సరం ఉనికిలో లేదు') 
-                : 'క్షమించండి!, శోధన నెల ఉనికిలో లేదు'}
-            </ErrorMessage>
-            <BtnContainer>
-            <TryAgainBtn type='button' onClick={statusRefresh}>{language === 'english' ? "Try again" : 'మళ్ళీ ప్రయత్నించండి'}</TryAgainBtn>
-            <TryAgainBtn refresh={'true'} type='button' onClick={refresh}>Refersh</TryAgainBtn>
-            </BtnContainer>
-        </FailureContainer>
-    )
-
-    
-    
-
-    const renderSuccessView = (language) => (
-        <>
-        <MonthName>{language === 'english' ? apiResponseData.EnglishMonthName : apiResponseData.TeluguMonthName} {language === 'english' ? `${apiResponseData.yearText}th Report`:`${apiResponseData.yearText}వ నివేదిక`}</MonthName>
-        <ResponsiveContainer width="90%" height='65%' style={{alignSelf: 'center', flexShrink: 0, marginTop: 20}}>
-                <BarChart  data={apiResponseData.childrenStatusArray.map(item => ({...item, name: language === 'english' ? item.name.split(' ')[0] : getTeluguWords(item.name),  హాజరు: item.presents}))} height={300} margin={{
-                top: 20,
-                right: 30,
-                left: 20,
-                bottom: 5,
-                
-            }}>
-                    
-                    <Tooltip trigger='hover' cursor={{fill: 'transparent'}}  contentStyle={{fontWeight: 'bold', fontFamily: "Mandali", backgroundColor: "rgba(193, 221, 139, 0.81)", backdropFilter: 'blur(3px)', color: "#fff", borderRadius: '6px', fontSize: 20, lineHeight: '25px'}}/>
-                    <Legend />
-                    <XAxis type='category' dataKey='name' tick={barHide === true ? {fill: "#fff"} : false} stroke="#f5d86e"   interval={0} style={{fontSize: language === 'english' ? 10 : 15, fontFamily: "Mandali, sans-serif", fontStyle: 'italic'}}/>
-                    <Bar dataKey={language === 'english' ? 'presents' : 'హాజరు'} label={barHide === false && {dataKey:'name', position: 'insideUp', angle: '-90', stroke: "#f5d86e", fontSize: language === 'english' ? '12px' : '13px', letterSpacing: '0.20em'}} fill="#097569" maxBarSize={45}   style={{cursor: "pointer", fontSize: 8, fontFamily: "Mandali, sans-serif"}} />
-                </BarChart>
-        </ResponsiveContainer>
-        
-      
-        </>
-    )
-
-    const renderLoaderView = () => (
-           <LoaderContainer>
-                <BarLoader color={"#fff"} size={170}  data-testid="loader"/>
-           </LoaderContainer>
-    )
-
-    
-
-    const renderCorrespondingView = (language) => {
-        const {childrenStatus} = apiResponseData
-    
-        switch (childrenStatus) {
-          case apiStatus.inProgress:
-            return renderLoaderView()
-          case apiStatus.success:
-            return renderSuccessView(language)
-          case apiStatus.failure:
-            return renderStatusFailureView(language)
-          default:
-            return null
-        }
-    }
-
     const getChildrenDetails = async () => {
         setApiResponseData(prev => ({
             ...prev,
             monthErr: false,
             childrenStatus: apiStatus.inProgress,
-            yearErr: false
+            yearErr: false,
+            smErr: false
         }))
         const {month, year} = apiResponseData
         let formattedMonth;
@@ -290,7 +197,7 @@ export const Graph = () => {
                         ...prev,
                         childrenStatus: apiStatus.failure,
                         errMsg: data.err_msg,
-                        failureImage: 'https://res.cloudinary.com/dkrpgt9kd/image/upload/v1707990706/k3yuvyjhdhdr0kqirv7j.png'
+                        
                     }))
                 }
             } catch (err) {
@@ -298,10 +205,107 @@ export const Graph = () => {
                     ...prev,
                     childrenStatus: apiStatus.failure,
                     errMsg: 'We cannot seem to find the page you are looking for.',
-                    failureImage: 'https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709099344/ocxgxmjr1xhk24uitho6.png'
+                    smErr: true
                 }))
             }
     }
+
+    useEffect(() => {
+        window.addEventListener('resize', () => {
+            setWidth(window.innerWidth);
+          });
+        if (WindowWidth >= 700) {
+            handleBar(true)
+        } else {
+            handleBar(false)
+        }
+    }, [WindowWidth])
+
+    const statusRefresh = () => {
+        getChildrenDetails()
+    }
+
+    const refresh = () => {
+        setApiResponseData({
+            childrenStatus: apiStatus.initial,
+            childrenStatusArray: [],
+            month: '',
+            year: '',
+            errMsg: '',
+            monthErr: false,
+            yearErr: false,
+            EnglishMonthName: '',
+            TeluguMonthName: '',
+            yearText: '',
+            failureImage: ''
+        })
+    }
+
+    const renderStatusFailureView = (language) => (
+        <FailureContainer>
+            {apiResponseData.smErr ? (<BiMessageSquareError size={60} color='#eb4b5b'/>) : <FailureImage alt='failure-view' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1707990706/k3yuvyjhdhdr0kqirv7j.png'/>}
+            <ErrorMessage>
+                {apiResponseData.errMsg === 'Sorry!, search year cannot exist' ? 
+                (language === 'english' ? 'Sorry!, search year cannot exist' : 'క్షమించండి!, శోధన సంవత్సరం ఉనికిలో లేదు') 
+                : 'క్షమించండి!, శోధన నెల ఉనికిలో లేదు'}
+            </ErrorMessage>
+            <BtnContainer>
+            <TryAgainBtn type='button' onClick={statusRefresh}>{language === 'english' ? "Try again" : 'మళ్ళీ ప్రయత్నించండి'}</TryAgainBtn>
+            <TryAgainBtn refresh={'true'} type='button' onClick={refresh}>Refersh</TryAgainBtn>
+            </BtnContainer>
+        </FailureContainer>
+    )
+
+    
+    
+
+    const renderSuccessView = (language) => (
+        <>
+        <MonthName>{language === 'english' ? apiResponseData.EnglishMonthName : apiResponseData.TeluguMonthName} {language === 'english' ? `${apiResponseData.yearText}th Report`:`${apiResponseData.yearText}వ నివేదిక`}</MonthName>
+        <ResponsiveContainer width="90%" height='65%' style={{alignSelf: 'center', flexShrink: 0, marginTop: 20}}>
+                <BarChart  data={apiResponseData.childrenStatusArray.map(item => ({...item, name: language === 'english' ? item.name.split(' ')[0] : getTeluguWords(item.name),  హాజరు: item.presents}))} height={300} margin={{
+                top: 20,
+                right: 30,
+                left: 20,
+                bottom: 5,
+                
+            }}>
+                    
+                    <Tooltip trigger='hover' cursor={{fill: 'transparent'}}  contentStyle={{fontWeight: 'bold', fontFamily: "Mandali", backgroundColor: "rgba(193, 221, 139, 0.81)", backdropFilter: 'blur(3px)', color: "#fff", borderRadius: '6px', fontSize: 20, lineHeight: '25px'}}/>
+                    <Legend />
+                    <XAxis type='category' dataKey='name' tick={barHide === true ? {fill: "#fff"} : false} stroke="#f5d86e"   interval={0} style={{fontSize: language === 'english' ? 10 : 15, fontFamily: "Mandali, sans-serif", fontStyle: 'italic'}}/>
+                    <Bar dataKey={language === 'english' ? 'presents' : 'హాజరు'} label={barHide === false && {dataKey:'name', position: 'insideUp', angle: '-90', stroke: "#f5d86e", fontSize: language === 'english' ? '12px' : '13px', letterSpacing: '0.20em'}} fill="#097569" maxBarSize={45}   style={{cursor: "pointer", fontSize: 8, fontFamily: "Mandali, sans-serif"}} />
+                </BarChart>
+        </ResponsiveContainer>
+        
+      
+        </>
+    )
+
+    const renderLoaderView = () => (
+           <LoaderContainer>
+                <BarLoader color={"#fff"} size={170}  data-testid="loader"/>
+           </LoaderContainer>
+    )
+
+    
+
+    const renderCorrespondingView = (language) => {
+        const {childrenStatus} = apiResponseData
+    
+        switch (childrenStatus) {
+          case apiStatus.inProgress:
+            return renderLoaderView()
+          case apiStatus.success:
+            return renderSuccessView(language)
+          case apiStatus.failure:
+            return renderStatusFailureView(language)
+          default:
+            return null
+        }
+    }
+
+   
 
     const submitForm = async (event) => {
          event.preventDefault()

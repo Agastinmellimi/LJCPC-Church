@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import BarLoader from "react-spinners/BarLoader";
 import {useNavigate} from 'react-router-dom'
 import { IoIosArrowBack } from "react-icons/io";
+import { BiMessageSquareError } from "react-icons/bi";
 import HandlerContext from '../../Context/HandlerContext';
 
 
@@ -15,7 +16,6 @@ import {
     ServiceDescription,
     LoaderContainer,
     FailureContainer,
-    FailureImage,
     ErrorMessage,
     TryAgainBtn,
     BackBtn,
@@ -125,7 +125,7 @@ const Services = () => {
 
     const renderStatusFailureView = (language) => (
         <FailureContainer>
-            <FailureImage alt='failure-view' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709099344/ocxgxmjr1xhk24uitho6.png'/>
+            <BiMessageSquareError size={60} color='#eb4b5b'/>
             <ErrorMessage>{language === 'english' ? 'We cannot seem to find the page you are looking for.' : 'మీరు వెతుకుతున్న సమాచారాన్ని మేము కనుగొనలేకపోయాము.'}</ErrorMessage>
             <TryAgainBtn type='button' onClick={statusRefresh}>{language === 'english' ? "Try again" : 'మళ్ళీ ప్రయత్నించండి'}</TryAgainBtn>
         </FailureContainer>
