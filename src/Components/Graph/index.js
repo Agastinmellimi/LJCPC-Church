@@ -114,7 +114,8 @@ export const Graph = () => {
             errMsg: '',
             monthErr: false,
             yearErr: false,
-            monthName: '',
+            EnglishMonthName: '',
+            TeluguMonthName: '',
             yearText: '',
             failureImage: ''
         })
@@ -135,42 +136,12 @@ export const Graph = () => {
         </FailureContainer>
     )
 
-    const getTeluguMonthName = () => {
-        const {month} = apiResponseData
-        switch (parseInt(month)) {
-            case 1: 
-                return "జనవరి"
-            case 2: 
-               return "ఫిబ్రవరి"
-            case 3:
-                return "మార్చి"
-            case 4:
-                return "ఏప్రిల్"
-            case 5:
-                return "మే"
-            case 6:
-                return "జూన్"
-            case 7:
-                return "జూలై"
-            case 8:
-                return "అగష్టు"
-            case 9:
-                return "సెప్టెంబర్"
-            case 10:
-                return "అక్టోబర్"
-            case 11:
-                return "నవంబర్"
-            case 12:
-                return "డిసెంబర్"
-            default:
-                return ''
-        }
-    }
+    
     
 
     const renderSuccessView = (language) => (
         <>
-        <MonthName>{language === 'english' ? apiResponseData.monthName : getTeluguMonthName(apiResponseData.month)} {language === 'english' ? `${apiResponseData.yearText}th`:`${apiResponseData.yearText}వ`} Report</MonthName>
+        <MonthName>{language === 'english' ? apiResponseData.EnglishMonthName : apiResponseData.TeluguMonthName} {language === 'english' ? `${apiResponseData.yearText}th Report`:`${apiResponseData.yearText}వ నివేదిక`}</MonthName>
         <ResponsiveContainer width="90%" height='65%' style={{alignSelf: 'center', flexShrink: 0, marginTop: 20}}>
                 <BarChart  data={apiResponseData.childrenStatusArray.map(item => ({...item, name: language === 'english' ? item.name.split(' ')[0] : getTeluguWords(item.name),  హాజరు: item.presents}))} height={300} margin={{
                 top: 20,
@@ -244,7 +215,7 @@ export const Graph = () => {
                 }
                 const response = await fetch(url, options)
                 const data = await response.json()
-                const getMonthName = () => {
+                const getEnglishMonthName = () => {
                     switch (parseInt(month)) {
                         case 1: 
                             return "Jan"
@@ -274,12 +245,44 @@ export const Graph = () => {
                             return ''
                     }
                 }
+                const getTeluguMonthName = () => {
+                    const {month} = apiResponseData
+                    switch (parseInt(month)) {
+                        case 1: 
+                            return "జనవరి"
+                        case 2: 
+                           return "ఫిబ్రవరి"
+                        case 3:
+                            return "మార్చి"
+                        case 4:
+                            return "ఏప్రిల్"
+                        case 5:
+                            return "మే"
+                        case 6:
+                            return "జూన్"
+                        case 7:
+                            return "జూలై"
+                        case 8:
+                            return "అగష్టు"
+                        case 9:
+                            return "సెప్టెంబర్"
+                        case 10:
+                            return "అక్టోబర్"
+                        case 11:
+                            return "నవంబర్"
+                        case 12:
+                            return "డిసెంబర్"
+                        default:
+                            return ''
+                    }
+                }
                 if (response.ok) {
                     setApiResponseData(prev => ({
                         ...prev,
                         childrenStatusArray: data,
                         childrenStatus: apiStatus.success,
-                        monthName: getMonthName(),
+                        EnglishMonthName:  getEnglishMonthName(),
+                        TeluguMonthName: getTeluguMonthName(),
                         yearText: year
                     }))
                 } else {
