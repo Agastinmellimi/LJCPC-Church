@@ -87,9 +87,9 @@ button{
 .star {
    z-index: 111; 
    position: fixed;
-   top: 10px; 
-   left: 15px;
-   font-size: 17px;
+   top: 13px; 
+   left: 18px;
+   font-size: 15px;
 }
 @media all and (min-width: 700px ) {
   .star {
@@ -113,10 +113,6 @@ button{
 
 @media all and (max-width: 400px) {
   .star {
-    z-index: 111; 
-    position: fixed;
-    top: 9px; 
-    left: 14px;
-    font-size: 18px;
+    display: none;
  } 
 }
