@@ -10,6 +10,7 @@ import { TbPlayerTrackNext } from "react-icons/tb";
 import { TbPlayerTrackPrev } from "react-icons/tb";
 import { IoIosArrowBack } from "react-icons/io";
 import { BiMessageSquareError } from "react-icons/bi";
+import { PiStarFill } from "react-icons/pi";
 import HandlerContext from '../../Context/HandlerContext';
 
 
@@ -44,6 +45,7 @@ import {
     Option
 } from './StyledComponents'
 
+
 const apiStatus = {
     initial: 'INITIAL',
     inProgress: 'IN_PROGRESS',
@@ -61,7 +63,8 @@ const ViewAttendance = () => {
           dateError: false,
           dateApiLoading: false,
           datesArray: [],
-          dateViceDetailsArray: []
+          lead: 0,
+          dateViceDetailsArray: [],
     })
     const navigate = useNavigate()
 
@@ -96,9 +99,16 @@ const ViewAttendance = () => {
             const response = await fetch(url, options)
             const data = await response.json()
             if (response.ok) {
+                let max = 0
+                for (let i = 1; i < data.length; i++) {
+                    if (data[i].presents > max) {
+                        max = data[i].presents;
+                    }
+                }
                 setApiResponseData(prev => ({
                     ...prev,
                     childrenStatusArray: data,
+                    lead: max,
                     childrenStatus: apiStatus.success
                 }))
             } else {
@@ -268,6 +278,8 @@ const ViewAttendance = () => {
        }
    }
 
+   
+
     const statusRefresh = () => {
         getAllChildrenAttendanceDetails()
     }
@@ -320,12 +332,17 @@ const ViewAttendance = () => {
     const renderSuccessChildrensStatusView = (language) => (
            <>
             <ViewChildrenContainer>
+                
                 {apiResponseData.childrenStatusArray.slice(startIndex, endIndex).map(item => (
-                    <ChildrenStatus key={item.name} count={item.presents}>
-                        <FirstLetterContainer count={item.presents}>{item.name[0].toUpperCase()}</FirstLetterContainer>
-                        <ChildrenName style={{ fontSize: language === 'తెలుగు' && `20px`}}>{language === 'english' ? item.name : getTeluguWords(item.name)}</ChildrenName>
+                    <>
+                    {apiResponseData.lead === item.presents && <ReactTooltip id={item.name} place="top" className="tool" />}
+                    <ChildrenStatus style={{cursor: apiResponseData.lead === item.presents && 'pointer'}} data-tooltip-id={item.name} data-tooltip-content={language === 'english' ? `congrats ${item.name.split(' ')[0]}, you are in lead.` : `అభినందనలు ${getTeluguWords(item.name).split(' ')[0]}, మీరు ముందంజలో ఉన్నారు`}  high={(apiResponseData.lead === item.presents).toString() } key={item.name} count={item.presents}>
+                        {apiResponseData.lead === item.presents && <PiStarFill  color='#e5e84f' className='star'/>}
+                        <FirstLetterContainer high={(apiResponseData.lead === item.presents).toString() } count={item.presents} style={{fontWeight: 600}}>{apiResponseData.childrenStatusArray.indexOf(item) + 1}</FirstLetterContainer>
+                        <ChildrenName high={(apiResponseData.lead === item.presents).toString() } style={{ fontSize: language === 'తెలుగు' && `20px`}}>{language === 'english' ? item.name : getTeluguWords(item.name)}</ChildrenName>
                         <Presents>{language === 'english' ? 'Present' : 'హాజరు'}: <AttendanceCount count={item.presents}>{item.presents}</AttendanceCount></Presents>
                     </ChildrenStatus>
+                    </>
                 ))}
             </ViewChildrenContainer>
             <PagenationContainer>
@@ -355,7 +372,7 @@ const ViewAttendance = () => {
         <ViewChildrenContainer>
             {apiResponseData.dateViceDetailsArray.slice(start, end).map(item => (
             <DailyStatusChildern key={item.name} present={item.presents}>
-                    <FirstLetterContainer date='true' present={item.presents}>{item.name[0].toUpperCase()}</FirstLetterContainer>
+                    <FirstLetterContainer date='true' present={item.presents} style={{fontWeight: 600}}>{apiResponseData.dateViceDetailsArray.indexOf(item) + 1}</FirstLetterContainer>
                     <ChildrenName style={{ fontSize: language === 'తెలుగు' && `20px`}}>{language === 'english' ? item.name : getTeluguWords(item.name)}</ChildrenName>
                     <Presents>{item.presents === 1 ? <FcOk size={25}/> : <FcCancel size={25}/>}</Presents>
             </DailyStatusChildern>

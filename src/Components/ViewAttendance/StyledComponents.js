@@ -48,13 +48,17 @@ export const ChildrenStatus = styled.li`
      margin-bottom: 20px;
      
      backdrop-filter: blur(2px);
-     background: rgba(219, 219, 219, 0.27000001072883606);
+     background-color: rgba(219, 219, 219, 0.27000001072883606);
+     
      width: 100%;
      border: ${props => props.count > 0 ? 'none': "2px solid #f7a1a7"};
      padding: 5px 20px 5px 20px;
      @media (min-width: 900px ) {
         width: 48%;
      }
+    
+     
+     
      @media (max-width: 400px) {
         flex-direction: column;
         align-items: stretch;
@@ -64,6 +68,11 @@ export const ChildrenStatus = styled.li`
       &:hover {
         transform: translateY(-5px);
       }
+      ${props => props.high === 'true' && `
+             background: linear-gradient(216.77deg, #04c769 -72.03%, rgba(43, 157, 105, 0.52) 23.82%, rgba(84, 112, 104, 0) 126.27%);
+             border: 1.5px solid #C5AE5E;
+             border-radius: 15px;
+      `}
 `
 export const FailureImage = styled.img`
          width: 80px;
@@ -114,6 +123,11 @@ export const FirstLetterContainer = styled.div`
     @media (max-width: 400px) {
       margin-top: 7px;
    }
+   
+   ${props => props.high === 'true' && `
+             border: 1.4mm ridge #4eed69;
+             color: #f0e173;
+      `}
 `
 export const ErrorMessage = styled.p`
   font-family: Mandali;
@@ -160,6 +174,11 @@ export const ChildrenName = styled.p`
       margin-top: 4px;
       margin-bottom: 0px;
    }
+   ${props => props.high === 'true' && `
+             color: #73f07b;
+             font-family: "Mandali", sans-serif;
+             letter-spacing: 0.07em;
+      `}
 `
 
 export const Presents = styled.p`
