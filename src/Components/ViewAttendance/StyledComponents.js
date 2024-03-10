@@ -106,7 +106,7 @@ export const FirstLetterContainer = styled.div`
    background: rgba(219, 219, 219, 0.27000001072883606);
    border: ${props => props.date === 'true' ? `${props.present === 0 ? "2px solid #f7a1a7" : '2px solid #4eed69'}` : `${props.count > 0 ? '2px solid #C5AE5E' : '2px solid #c4605e'}`};
    border-radius: 50%;
-   font-size: 20px;
+   font-size: 19px;
    color: #fff;
    -ms-user-select: none;
   -webkit-user-select: none;
@@ -115,6 +115,7 @@ export const FirstLetterContainer = styled.div`
    @media (min-width: 500px) {
        width: 50px;
        height: 50px;
+       font-size: 20px;
     }
     transition: transform 0.5s ease-in-out;
     &:hover {
@@ -122,11 +123,16 @@ export const FirstLetterContainer = styled.div`
     }
     @media (max-width: 400px) {
       margin-top: 7px;
+      font-size: 16px;
    }
-   
+   text-shadow: 1px 1px 2px #595a5c;
    ${props => props.high === 'true' && `
-             border: 1.4mm ridge #4eed69;
+             border: 1.2mm ridge #4eed69;
              color: #f0e173;
+             text-shadow: 1px 1px 2px #595a5c;
+             @media (max-width: 400px) {
+                  border: 1mm ridge #4eed69;
+              }
       `}
 `
 export const ErrorMessage = styled.p`
