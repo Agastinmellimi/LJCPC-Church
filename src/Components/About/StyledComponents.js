@@ -106,8 +106,6 @@ export const HomeBannerContainer = styled.div`
     @media (max-width: 520px) {
         flex-direction: column;
     }
-    
-    
 `
 
 export const Image = styled.img`

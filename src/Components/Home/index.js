@@ -47,7 +47,7 @@ const Home = () => {
         return (
           <Container>
               <BannerContainer data-aos='flip-down' data-tooltip-delay-show={2000}>
-                <BannerImage alt='church' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1709185072/btpy2wzv7vku7ak06yxr.png'/>
+                <BannerImage alt='church' src='https://res.cloudinary.com/dkrpgt9kd/image/upload/v1710051774/jfqwth5p1vptaofog8eu.png'/>
                 <BannerContent>
                     <Heading>{language === 'english' ? 'Lord Jesus Christ Prayer Church': 'ప్రభువైన యేసు క్రీస్తు ప్రార్థన మందిరం.'}</Heading>
                 </BannerContent>
