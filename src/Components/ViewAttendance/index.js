@@ -323,7 +323,7 @@ const ViewAttendance = () => {
                 case apiResponseData.min:
                     return ( language === 'english' ? `${name.split(' ')[0]}, your attendance is very low.` : `${getTeluguWords(name).split(' ')[0]}, మీ హాజరు చాలా తక్కువగా ఉంది`)
                 case occur:
-                    return (language === 'english' ? `congrats ${name.split(' ')[0]}, You're one step away from peak attendance.` : `అభినందనలు ${getTeluguWords(name).split(' ')[0]}, మీరు అత్యధిక హాజరుకు ఒక అడుగు వెనకబడి ఉన్నారు`)
+                    return (language === 'english' ? `congrats ${name.split(' ')[0]}, You're one step away from peak attendance.` : `అభినందనలు ${getTeluguWords(name).split(' ')[0]}, కాని మీరు అత్యధిక హాజరుకు ఒక అడుగు వెనకబడి ఉన్నారు`)
                 default:
                     return ''
             }
