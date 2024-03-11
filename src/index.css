@@ -90,6 +90,7 @@ button{
    top: 13px; 
    left: 18px;
    font-size: 15px;
+   animation: move 1s ease-in-out infinite alternate;
 }
 @media all and (min-width: 700px ) {
   .star {
@@ -115,4 +116,15 @@ button{
   .star {
     display: none;
  } 
+}
+
+@keyframes move {
+  to {
+     transform: scale(1);
+     color: #c6eb34;
+  }
+   from {
+     transform: scale(0.80);
+     color: #a9cf11;
+   }
 }

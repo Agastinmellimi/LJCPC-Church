@@ -337,7 +337,7 @@ const ViewAttendance = () => {
                     <>
                     {apiResponseData.lead === item.presents && <ReactTooltip id={item.name} place="top" className="tool" />}
                     <ChildrenStatus style={{cursor: apiResponseData.lead === item.presents && 'pointer'}} data-tooltip-id={item.name} data-tooltip-content={language === 'english' ? `congrats ${item.name.split(' ')[0]}, you are in lead.` : `అభినందనలు ${getTeluguWords(item.name).split(' ')[0]}, మీరు ముందంజలో ఉన్నారు`}  high={(apiResponseData.lead === item.presents).toString() } key={item.name} count={item.presents}>
-                        {apiResponseData.lead === item.presents && <PiStarFill  color='#e5e84f' className='star'/>}
+                        {apiResponseData.lead === item.presents && <PiStarFill className='star'/>}
                         <FirstLetterContainer high={(apiResponseData.lead === item.presents).toString() } count={item.presents} style={{fontWeight: 600}}>{apiResponseData.childrenStatusArray.indexOf(item) + 1}</FirstLetterContainer>
                         <ChildrenName high={(apiResponseData.lead === item.presents).toString() } style={{ fontSize: language === 'తెలుగు' && `20px`}}>{language === 'english' ? item.name : getTeluguWords(item.name)}</ChildrenName>
                         <Presents>{language === 'english' ? 'Present' : 'హాజరు'}: <AttendanceCount count={item.presents}>{item.presents}</AttendanceCount></Presents>

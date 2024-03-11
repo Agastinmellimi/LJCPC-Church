@@ -70,7 +70,7 @@ export const ChildrenStatus = styled.li`
       }
       ${props => props.high === 'true' && `
              background: linear-gradient(216.77deg, #04c769 -72.03%, rgba(43, 157, 105, 0.52) 23.82%, rgba(84, 112, 104, 0) 126.27%);
-             border: 1.5px solid #C5AE5E;
+             border: 1.5px solid #5de858;
              border-radius: 15px;
       `}
 `
