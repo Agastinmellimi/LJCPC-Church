@@ -64,6 +64,7 @@ const ViewAttendance = () => {
           dateApiLoading: false,
           datesArray: [],
           lead: 0,
+          min: 0,
           dateViceDetailsArray: [],
     })
     const navigate = useNavigate()
@@ -99,16 +100,14 @@ const ViewAttendance = () => {
             const response = await fetch(url, options)
             const data = await response.json()
             if (response.ok) {
-                let max = 0
-                for (let i = 1; i < data.length; i++) {
-                    if (data[i].presents > max) {
-                        max = data[i].presents;
-                    }
-                }
+                const  max = Math.max(...data.map(item => item.presents))
+                const  minNum = Math.min(...data.map(item => item.presents))
+               
                 setApiResponseData(prev => ({
                     ...prev,
                     childrenStatusArray: data,
                     lead: max,
+                    min: minNum,
                     childrenStatus: apiStatus.success
                 }))
             } else {
@@ -312,34 +311,52 @@ const ViewAttendance = () => {
         </FailureContainer>
     )
 
-    const handlePrevPage = () => {
-        if (WindowWidth >= 700) {
-            getAllChildrenAttendanceDetails()
-        } 
-        
-        setCurrentPage(prevPage => prevPage - 1);
-    }
-    const handleNextPage = () => {
-        if (WindowWidth >= 700) {
-            getAllChildrenAttendanceDetails()
-        } 
-        setCurrentPage(prevPage => prevPage + 1);
-    }
-
-    const startIndex = (currentPage - 1) * 6;
-    const endIndex = startIndex + 6;
     
-    const renderSuccessChildrensStatusView = (language) => (
-           <>
+    
+    
+    const renderSuccessChildrensStatusView = (language) => {
+        const correspondingMessage = (presents, name) => {
+            const occur = apiResponseData.lead - 1
+            switch (presents) {
+                case apiResponseData.lead:
+                    return (language === 'english' ? `congrats ${name.split(' ')[0]}, you are in lead.` : `అభినందనలు ${getTeluguWords(name).split(' ')[0]}, మీరు ముందంజలో ఉన్నారు`)
+                case apiResponseData.min:
+                    return ( language === 'english' ? `${name.split(' ')[0]}, your attendance is very low.` : `${getTeluguWords(name).split(' ')[0]}, మీ హాజరు చాలా తక్కువగా ఉంది`)
+                case occur:
+                    return (language === 'english' ? `congrats ${name.split(' ')[0]}, You're one step away from peak attendance.` : `అభినందనలు ${getTeluguWords(name).split(' ')[0]}, మీరు అత్యధిక హాజరుకు ఒక అడుగు వెనకబడి ఉన్నారు`)
+                default:
+                    return ''
+            }
+        }
+        const handlePrevPage = () => {
+            if (WindowWidth >= 700) {
+                getAllChildrenAttendanceDetails()
+            } 
+            
+            setCurrentPage(prevPage => prevPage - 1);
+        }
+        const handleNextPage = () => {
+            if (WindowWidth >= 700) {
+                getAllChildrenAttendanceDetails()
+            } 
+            setCurrentPage(prevPage => prevPage + 1);
+        }
+    
+        const startIndex = (currentPage - 1) * 6;
+        const endIndex = startIndex + 6;
+    
+          return ( <>
             <ViewChildrenContainer>
                 
                 {apiResponseData.childrenStatusArray.slice(startIndex, endIndex).map(item => (
                     <>
-                    {apiResponseData.lead === item.presents && <ReactTooltip id={item.name} place="top" className="tool" />}
-                    <ChildrenStatus style={{cursor: apiResponseData.lead === item.presents && 'pointer'}} data-tooltip-id={item.name} data-tooltip-content={language === 'english' ? `congrats ${item.name.split(' ')[0]}, you are in lead.` : `అభినందనలు ${getTeluguWords(item.name).split(' ')[0]}, మీరు ముందంజలో ఉన్నారు`}  high={(apiResponseData.lead === item.presents).toString() } key={item.name} count={item.presents}>
+                    {apiResponseData.lead === item.presents && <ReactTooltip id={item.name} place="top" className={`tool ${apiResponseData.lead === item.presents && 'border'}` } />}
+                    {apiResponseData.min === item.presents && <ReactTooltip id={item.name} place="top" className="tool-red" />}
+                    {(apiResponseData.lead - 1) === item.presents && <ReactTooltip id={item.name} place="top" className="tool-occur" />}
+                    <ChildrenStatus occur={(apiResponseData.lead - 1 === item.presents).toString()} low={(apiResponseData.min === item.presents).toString()} data-tooltip-id={item.name}  data-tooltip-content={correspondingMessage(item.presents, item.name)}  high={(apiResponseData.lead === item.presents).toString() } key={item.name} count={item.presents}>
                         {apiResponseData.lead === item.presents && <PiStarFill className='star'/>}
-                        <FirstLetterContainer high={(apiResponseData.lead === item.presents).toString() } count={item.presents} style={{fontWeight: 600}}>{apiResponseData.childrenStatusArray.indexOf(item) + 1}</FirstLetterContainer>
-                        <ChildrenName high={(apiResponseData.lead === item.presents).toString() } style={{ fontSize: language === 'తెలుగు' && `20px`}}>{language === 'english' ? item.name : getTeluguWords(item.name)}</ChildrenName>
+                        <FirstLetterContainer occur={(apiResponseData.lead - 1 === item.presents).toString()} low={(apiResponseData.min === item.presents).toString()} high={(apiResponseData.lead === item.presents).toString() } count={item.presents} style={{fontWeight: 600}}>{apiResponseData.childrenStatusArray.indexOf(item) + 1}</FirstLetterContainer>
+                        <ChildrenName low={(apiResponseData.min === item.presents).toString()} occur={(apiResponseData.lead - 1 === item.presents).toString()} high={(apiResponseData.lead === item.presents).toString() } style={{ fontSize: language === 'తెలుగు' && `20px`}}>{language === 'english' ? item.name : getTeluguWords(item.name)}</ChildrenName>
                         <Presents>{language === 'english' ? 'Present' : 'హాజరు'}: <AttendanceCount count={item.presents}>{item.presents}</AttendanceCount></Presents>
                     </ChildrenStatus>
                     </>
@@ -351,8 +368,8 @@ const ViewAttendance = () => {
                 <ReactTooltip id="next" place="right" className="tool" delayShow={1000} anchorSelect='clickable'/>
                 <NextButton type='button' data-tooltip-id='next' data-tooltip-content={"Next"} onClick={handleNextPage} disabled={endIndex >= apiResponseData.childrenStatusArray.length}><TbPlayerTrackNext color='#C5AE5E'/></NextButton>
             </PagenationContainer>
-        </>
-    )
+        </>)
+    }
 
 
 

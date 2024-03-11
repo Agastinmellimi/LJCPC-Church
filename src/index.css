@@ -55,6 +55,27 @@ code {
   font-weight: 600 !important;
   line-height: 20px !important;
   z-index: 11111 !important;
+  
+}
+.border {
+  border: 2px solid #02471a !important;
+  border-radius: 5px !important;
+}
+.tool-red{
+  background-color: #F57786!important;
+  color: #fff!important;
+  font-family: "Mandali", sans-serif !important;
+  font-weight: 600 !important;
+  line-height: 20px !important;
+  z-index: 11111 !important;
+}
+.tool-occur{
+  background-color: #b4d130 !important;
+  color: #fff!important;
+  font-family: "Mandali", sans-serif !important;
+  font-weight: 600 !important;
+  line-height: 20px !important;
+  z-index: 11111 !important;
 }
 h1{
   -ms-user-select: none;
@@ -125,6 +146,6 @@ button{
   }
    from {
      transform: scale(0.80);
-     color: #a9cf11;
+     color: #d7d979;
    }
 }

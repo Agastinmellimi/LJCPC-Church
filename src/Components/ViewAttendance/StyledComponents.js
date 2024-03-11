@@ -72,6 +72,17 @@ export const ChildrenStatus = styled.li`
              background: linear-gradient(216.77deg, #04c769 -72.03%, rgba(43, 157, 105, 0.52) 23.82%, rgba(84, 112, 104, 0) 126.27%);
              border: 1.5px solid #5de858;
              border-radius: 15px;
+             cursor: pointer;
+      `}
+      ${props => props.low === 'true' && `
+             background: rgba(245, 118, 134, 0.3799999952316284);
+             border: 1.5px solid #F57786;
+             cursor: pointer;
+      `}
+      ${props => props.occur === 'true' && `
+             background: linear-gradient(216.95deg, #edf066 -72.03%, rgba(220, 208, 146, 0.52) 33.65%, rgba(112, 111, 84, 0) 146.61%);
+             border: 1.5px solid #EDF066;
+             cursor: pointer;
       `}
 `
 export const FailureImage = styled.img`
@@ -129,9 +140,18 @@ export const FirstLetterContainer = styled.div`
    ${props => props.high === 'true' && `
              border: 1.2mm ridge #4eed69;
              color: #f0e173;
-             text-shadow: 1px 1px 2px #595a5c;
+             
              @media (max-width: 400px) {
                   border: 1mm ridge #4eed69;
+              }
+      `}
+      ${props => props.low === 'true' && `
+             border: 1.5px solid #F57786;
+      `}
+      ${props => props.occur === 'true' && `
+             border: 1.2mm ridge #EDF066;
+             @media (max-width: 400px) {
+                  border: 1mm ridge #EDF066;
               }
       `}
 `
@@ -182,6 +202,18 @@ export const ChildrenName = styled.p`
    }
    ${props => props.high === 'true' && `
              color: #73f07b;
+             font-family: "Mandali", sans-serif;
+             letter-spacing: 0.07em;
+      `}
+      ${props => props.low === 'true' && `
+             
+             color: #ed6f78;
+             font-family: "Mandali", sans-serif;
+             
+      `}
+      ${props => props.occur === 'true' && `
+            
+             color: #EDF066;
              font-family: "Mandali", sans-serif;
              letter-spacing: 0.07em;
       `}
