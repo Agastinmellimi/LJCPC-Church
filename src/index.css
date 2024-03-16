@@ -1,30 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=Koulen&family=Miltonian+Tattoo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=Koulen&family=Mandali&family=Miltonian+Tattoo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=DM+Sans:opsz,wght@9..40,500&family=Koulen&family=Mandali&family=Miltonian+Tattoo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=DM+Sans:opsz,wght@9..40,500&family=Josefin+Sans&family=Koulen&family=Mandali&family=Miltonian+Tattoo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=DM+Sans:opsz,wght@9..40,500&family=Josefin+Sans&family=Koulen&family=Mandali&family=Miltonian+Tattoo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=DM+Sans:opsz,wght@9..40,500&family=Josefin+Sans&family=Koulen&family=Mako&family=Mandali&family=Marmelad&family=Miltonian+Tattoo&display=swap');
-*{
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=Koulen&family=Miltonian+Tattoo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=Koulen&family=Mandali&family=Miltonian+Tattoo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=DM+Sans:opsz,wght@9..40,500&family=Koulen&family=Mandali&family=Miltonian+Tattoo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=DM+Sans:opsz,wght@9..40,500&family=Josefin+Sans&family=Koulen&family=Mandali&family=Miltonian+Tattoo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=DM+Sans:opsz,wght@9..40,500&family=Josefin+Sans&family=Koulen&family=Mandali&family=Miltonian+Tattoo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bungee+Spice&family=DM+Sans:opsz,wght@9..40,500&family=Josefin+Sans&family=Koulen&family=Mako&family=Mandali&family=Marmelad&family=Miltonian+Tattoo&display=swap");
+* {
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
 body {
   margin: 0;
-  
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important; 
-  -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important; 
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+  -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
   outline: none !important;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -48,7 +48,7 @@ code {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-.tool{
+.tool {
   background-color: #5bc971 !important;
   color: #fff !important;
   font-family: "Mandali", sans-serif !important;
@@ -56,24 +56,23 @@ code {
   line-height: 20px !important;
   z-index: 11111 !important;
   font-size: 18px !important;
-  
 }
 .border {
   border: 2px solid #02471a !important;
   border-radius: 5px !important;
 }
-.tool-red{
-  background-color: #F57786!important;
-  color: #fff!important;
+.tool-red {
+  background-color: #f57786 !important;
+  color: #fff !important;
   font-family: "Mandali", sans-serif !important;
   font-weight: 600 !important;
   line-height: 20px !important;
   z-index: 11111 !important;
   font-size: 18px !important;
 }
-.tool-occur{
+.tool-occur {
   background-color: #b4d130 !important;
-  color: #fff!important;
+  color: #fff !important;
   font-family: "Mandali", sans-serif !important;
   font-weight: 600 !important;
   line-height: 20px !important;
@@ -81,95 +80,84 @@ code {
   font-size: 18px !important;
 }
 @media (max-width: 500px) {
-   .tool{
-        width: 80% !important;
-        align-self: center !important;
-        word-break: break-all !important;
-        font-size: 15px !important;
-   }
-   .tool-red{
-       width: 80% !important;
-        align-self: center !important;
-        word-break: break-all !important;
-        font-size: 15px !important;
-   }
-   .tool-occur{
+  .tool {
     width: 80% !important;
     align-self: center !important;
     word-break: break-all !important;
     font-size: 15px !important;
-    
-   }
+  }
+  .tool-red {
+    width: 80% !important;
+    align-self: center !important;
+    word-break: break-all !important;
+    font-size: 15px !important;
+  }
+  .tool-occur {
+    width: 80% !important;
+    align-self: center !important;
+    word-break: break-all !important;
+    font-size: 15px !important;
+  }
 }
-h1{
+h1 {
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
 }
-p{
+p {
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
 }
-button{
+button {
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
 }
-.icon{
+.icon {
   animation: slide 1s ease-in-out infinite alternate;
   font-size: 25px;
 }
 @keyframes slide {
-    to {
-          transform: translateX(-7px);
-          
-    } from {
-          transform: translateX(2px);
-          
-    }
+  to {
+    transform: translateX(-7px);
+  }
+  from {
+    transform: translateX(2px);
+  }
 }
 .star {
-   z-index: 111; 
-   position: fixed;
-   top: 13px; 
-   left: 18px;
-   font-size: 15px;
-   animation: move 1s ease-in-out infinite alternate;
+  z-index: 111;
+  position: fixed;
+  top: 13px;
+  left: 18px;
+  font-size: 15px;
+  color: #dff2ee;
 }
-@media all and (min-width: 700px ) {
+@media all and (min-width: 700px) {
   .star {
-    z-index: 111; 
+    z-index: 111;
     position: fixed;
-    top: 18px; 
+    top: 18px;
     left: 15px;
     font-size: 21px;
- }
+    color: #66f274;
+  }
 }
 
 @media all and (min-width: 500px) and (max-width: 699px) {
   .star {
-    z-index: 111; 
+    z-index: 111;
     position: fixed;
-    top: 8px; 
+    top: 8px;
     left: 15px;
     font-size: 18px;
- } 
+    color: #dff2ee;
+  }
 }
 
 @media all and (max-width: 400px) {
   .star {
     display: none;
- } 
-}
-
-@keyframes move {
-  to {
-     transform: scale(1);
-     color: #c6eb34;
   }
-   from {
-     transform: scale(0.80);
-     color: #d7d979;
-   }
 }
