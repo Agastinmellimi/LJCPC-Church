@@ -6,7 +6,6 @@ import { VscGraph } from "react-icons/vsc";
 import { SiInformatica } from "react-icons/si";
 import { PiYoutubeLogoDuotone } from "react-icons/pi";
 import { PiTimerDuotone } from "react-icons/pi";
-import Skeleton from "@mui/material/Skeleton";
 
 import AOS from "aos";
 
@@ -41,13 +40,6 @@ const Home = () => {
         const { language, setLanguage } = value;
         return (
           <Container>
-            <Skeleton
-              animation="wave"
-              variant="circular"
-              width={40}
-              sx={{ bgcolor: "#ffff" }}
-              height={40}
-            />
             <BannerContainer
               data-aos="flip-down"
               data-tooltip-delay-show={2000}
